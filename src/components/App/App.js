@@ -13,7 +13,6 @@ import Register from '../Register/Register';
 function App() {
   return (
     <div className="App">
-      <h1>TEST</h1>
       <div className="page">
         <Routes>
           <Route path="/" element={<Main />} />
