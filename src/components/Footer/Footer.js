@@ -10,17 +10,17 @@ function Footer() {
       <div className="footer__container">
         <h3 className="footer__header">Учебный проект Яндекс.Практикум х BeatFilm.</h3>
         <div className="footer__info">
-          <p className="footer__copyright">© {new Date().getFullYear()}</p>
+          <p className="footer__copyright">© { new Date().getFullYear() }</p>
           <nav className="footer__nav">
             <Link
-              to={"https://practicum.yandex.ru/"}
+              to={ "https://practicum.yandex.ru/" }
               target="_blank"
               className="footer__link"
             >
               Яндекс.Практикум
             </Link>
             <Link
-              to={"https://github.com/californikate"}
+              to={ "https://github.com/californikate" }
               target="_blank"
               className="footer__link"
             >
