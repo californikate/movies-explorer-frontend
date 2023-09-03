@@ -1,0 +1,49 @@
+.techs {
+  background: #F5F5F5;
+  padding: 110px 70px;
+}
+
+.techs__header {
+  margin: 0;
+  max-width: 600px;
+
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.88px;
+}
+
+.techs__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 23px;
+  border-top: 1px solid #000;
+}
+
+.techs__title {
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 1.16;
+  letter-spacing: -2px;
+
+  text-align: center;
+  margin: 90px 0 26px;
+}
+
+.techs__subtitle {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: -0.56px;
+
+  max-width: 460px;
+  text-align: center;
+}
+
+.techs__table {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 10px;
+}
