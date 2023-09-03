@@ -16,12 +16,14 @@ function Main() {
   return(
     <>
       <Header />
+
       <Promo />
       <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />
       <Portfolio />
+      
       <Footer />
     </>
   )

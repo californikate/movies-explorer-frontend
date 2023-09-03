@@ -7,11 +7,11 @@ import logo from '../../images/logo.svg';
 function Register() {
   return(
     <section className="auth">
+      <Link className="auth__logo-link" to={"/"}>
+        <img className="auth__logo" src={ logo } alt="логотип сайта." />
+      </Link>
+      <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" action="#">
-        <Link className="auth__logo-link" to={"/"}>
-          <img className="auth__logo" src={ logo } alt="логотип сайта." />
-        </Link>
-        <h2 className="auth__title">Добро пожаловать!</h2>
         <label for="name" className="auth__form-label">Имя</label>
         <input 
           id="name"
@@ -30,7 +30,7 @@ function Register() {
           className="auth__form-input"
           required
         />
-        <label for="password" className="lauth__form-label">Пароль</label>
+        <label for="password" className="auth__form-label">Пароль</label>
         <input
           id="password" 
           name="password" 
