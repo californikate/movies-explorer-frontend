@@ -1,0 +1,36 @@
+.footer {
+  padding: 79px 70px 20px;
+}
+
+.footer__header {
+  margin: 0;
+  padding: 79px 0 20px;
+  text-align: center;
+  color: #A0A0A0;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.footer__info {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0;
+
+  border-top: 1px solid #E8E8E8;
+
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+.footer__copyright {
+  margin: 0;
+}
+
+.footer__link {
+  color: #000;
+  text-decoration: none;
+  margin-left: 20px;
+}
