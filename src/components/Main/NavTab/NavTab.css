@@ -1,0 +1,17 @@
+.navtab {
+  background-color: #000;
+}
+
+.navtab__table {
+  display: flex;
+  margin: 0 auto;
+  padding: 24px 0;
+
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.navtab__table-link {
+  color: #fff;
+}
