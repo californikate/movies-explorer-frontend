@@ -1,0 +1,44 @@
+.about-project {
+  min-height: 608px;
+  padding: 110px 70px;
+}
+
+.about-project__header {
+  margin: 0;
+  max-width: 600px;
+
+  color: #000;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.88px;
+}
+
+.about-project__table {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 70px 0;
+  border-top: 1px solid #000;
+}
+
+.about-project__table-item {
+  list-style: none;
+  max-width: 550px;
+}
+.about-project__table-title {
+  margin: 0 0 26px;
+
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.2;
+  letter-spacing: -0.88px;
+}
+
+.about-project__table-subtitle {
+  margin: 0;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.43;
+}

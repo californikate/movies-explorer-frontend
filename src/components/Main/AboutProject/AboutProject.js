@@ -14,7 +14,7 @@ function AboutProject() {
               функциональности и финальные доработки.
             </p>
           </li>
-          <li>
+          <li className="about-project__table-item">
             <h3 className="about-project__table-title">На выполнение диплома ушло 5 недель</h3>
             <p className="about-project__table-subtitle">
               У каждого этапа был мягкий и жёсткий дедлайн, которые нужно 
