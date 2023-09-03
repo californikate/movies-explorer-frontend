@@ -11,19 +11,19 @@ function Portfolio() {
           <li className="portfolio__table-item">
             <Link to={"https://californikate.github.io/how-to-learn/"} target="_blank" className="portfolio__table-link">
               Статичный сайт
-              <span className="portfolio__table-icon" />
+              <span className="portfolio__table-icon">↗</span>
             </Link>
           </li>
           <li className="portfolio__table-item">
             <Link to={"https://californikate.github.io/russian-travel/"} target="_blank" className="portfolio__table-link">
               Адаптивный сайт
-              <span className="portfolio__table-icon" />
+              <span className="portfolio__table-icon">↗</span>
             </Link>
           </li>
           <li className="portfolio__table-item">
             <Link to={""} target="_blank" className="portfolio__table-link">
               Одностраничное приложение
-              <span className="portfolio__table-icon" />
+              <span className="portfolio__table-icon">↗</span>
             </Link>
           </li>
         </ul>

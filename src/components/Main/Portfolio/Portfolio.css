@@ -1,0 +1,38 @@
+.portfolio {
+  padding: 100px 70px;
+}
+
+.portfolio__header {
+  margin: 0 0 30px;
+  color: #A0A0A0;
+
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.11;
+}
+
+.portfolio__table {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio__table-item {
+  padding: 20px 0;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.67;
+  letter-spacing: -1.2px;
+}
+
+.portfolio__table-link {
+  color: #000;
+  text-decoration: none;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.portfolio__table-icon {
+  line-height: 2;
+}
