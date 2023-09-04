@@ -8,7 +8,7 @@ function AboutMe() {
     <section className="about-me" id="about-me">
       <h2 className="about-me__header">Студент</h2>
       <div className="about-me__container">
-        <div>
+        <div className="about-me__wrap">
           <h3 className="about-me__title">Катерина</h3>
           <p className="about-me__subtitle">Фронтенд-разработчик, 34 года</p>
           <p className="about-me__description">
