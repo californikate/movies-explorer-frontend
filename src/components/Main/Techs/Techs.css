@@ -1,6 +1,6 @@
 .techs {
   background: #F5F5F5;
-  padding: 105px 70px 85px;
+  padding: 100px 70px 85px;
   box-sizing: border-box;
 }
 
@@ -67,7 +67,7 @@
 
 @media screen and (max-width: 768px) {
   .techs {
-    padding: 95px 50px 75px;
+    padding: 90px 50px 75px;
   }
 
   .techs__title {
