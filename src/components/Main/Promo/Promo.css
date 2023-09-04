@@ -1,6 +1,5 @@
 .promo {
-  background: #F3C1F8 url('../../../images/landing-logo.svg') no-repeat center;
-  min-height: 524px;
+  background: #F3C1F8 url('../../../images/landing-logo.svg') no-repeat center 82px;
   box-sizing: border-box;
 }
 
@@ -15,4 +14,38 @@
   font-size: 50px;
   line-height: 1.16;
   letter-spacing: -2px;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    min-height: 784px;
+    background-position: center 224px;
+  }
+
+  .promo__header {
+    padding-top: 326px;
+  }
+}
+
+@media screen and (max-width: 670px) {
+  .promo__header {
+    max-width: 480px;
+    font-size: 40px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .promo {
+    min-height: 570px;
+    background-position: center 142px;
+    background-size: 248px;
+  }
+
+  .promo__header {
+    padding-top: 207px;
+
+    font-size: 31px;
+    line-height: 1.25;
+    letter-spacing: -1.24px;
+  }
 }
