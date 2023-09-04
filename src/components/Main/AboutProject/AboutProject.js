@@ -22,10 +22,12 @@ function AboutProject() {
             </p>
           </li>
         </ul>
-        <div>
-          <div></div>
-          <div></div>
-        </div>
+        <ul className="about-project__timeline">
+            <li className="about-project__timeline-item about-project__timeline-item_one">1 неделя</li>
+            <li className="about-project__timeline-item about-project__timeline-item_four">4 недели</li>
+            <li className="about-project__timeline-item_name">Back-end</li>
+            <li className="about-project__timeline-item_name">Front-end</li>
+        </ul>
       </div>
     </section>
   );

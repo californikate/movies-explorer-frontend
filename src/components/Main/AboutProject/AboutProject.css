@@ -1,5 +1,4 @@
 .about-project {
-  min-height: 608px;
   padding: 110px 70px;
 }
 
@@ -17,7 +16,8 @@
   display: flex;
   justify-content: space-between;
   gap: 40px;
-  padding: 70px 0;
+  margin: 23px 0 0;
+  padding: 70px 0 0;
   border-top: 1px solid #000;
 }
 
@@ -25,6 +25,7 @@
   list-style: none;
   max-width: 550px;
 }
+
 .about-project__table-title {
   margin: 0 0 26px;
 
@@ -35,9 +36,135 @@
 }
 
 .about-project__table-subtitle {
-  margin: 0;
+  margin: 0 0 110px;
 
   font-weight: 400;
   font-size: 14px;
   line-height: 1.43;
+}
+
+.about-project__timeline {
+  max-width: 1140px;
+  margin: 0;
+  padding: 0;
+
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: repeat(2, 36px);
+  row-gap: 14px;
+
+  list-style: none;
+  text-align: center;
+}
+
+.about-project__timeline-item {
+  padding-top: 10px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.about-project__timeline-item_one {
+  background-color: #000;
+  color: #fff;
+}
+
+.about-project__timeline-item_four {
+  background-color: #F2F2F2;
+}
+
+.about-project__timeline-item_name {
+  color: #A0A0A0;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px 70px;
+  }
+  
+  .about-project__table-subtitle {
+    margin: 0 0 94px;
+  
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__table-title {
+    margin-bottom: 22px;
+  }
+
+  .about-project__timeline {
+    max-width: 668px;
+  }
+
+  .about-project__timeline-item {
+    padding-top: 9px;
+  }
+
+  .about-project__timeline-item_name {
+    font-weight: 400;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .about-project {
+    padding: 70px 18px 49px;
+  }
+
+  .about-project__header {
+    max-width: 284px;
+  
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-project__table {
+    max-width: 284px;
+    flex-direction: column;
+    gap: 56px;
+    margin-top: 28px;
+    padding-top: 60px;
+  }
+
+  .about-project__table-item {
+    max-width: 284px;
+  }
+
+  .about-project__table-title {
+    margin-bottom: 16px;
+  
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+  
+  .about-project__table-subtitle {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .about-project__timeline {
+    max-width: 284px;
+    margin-top: 60px;
+  
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 10px;
+  }
+  
+  .about-project__timeline-item {
+    padding-top: 12px;
+  
+    font-size: 11px;
+  }
+  
+  .about-project__timeline-item_name {  
+    font-weight: 400;
+    font-size: 11px;
+  }
 }
