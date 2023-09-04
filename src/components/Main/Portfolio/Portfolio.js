@@ -21,7 +21,7 @@ function Portfolio() {
             </Link>
           </li>
           <li className="portfolio__table-item">
-            <Link to={""} target="_blank" className="portfolio__table-link">
+            <Link to={"https://californikate.github.io/react-mesto-api-full-gha/"} target="_blank" className="portfolio__table-link">
               Одностраничное приложение
               <span className="portfolio__table-icon">↗</span>
             </Link>
