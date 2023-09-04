@@ -8,16 +8,17 @@ import React from "react";
 import './Header.css';
 import { Link } from "react-router-dom";
 import logo from '../../images/logo.svg';
+import Navigation from "../Navigation/Navigation";
 
 function Header({ loggedIn }) {
   return(
     <header className="header">
       <div className="header__container">
-        <Link className="header__logo-link" to={"/"}>
+        <Link to={"/"} className="header__logo-link">
           <img className="header__logo" src={ logo } alt="логотип сайта." />
         </Link>
         <div className="header__nav">
-
+        
         </div>
       </div>
     </header>
