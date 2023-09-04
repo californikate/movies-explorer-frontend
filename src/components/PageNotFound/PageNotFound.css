@@ -36,3 +36,30 @@
   color: #000;
   text-decoration: none;
 }
+
+@media screen and (max-width: 768px) {
+  .notfound__container {
+    margin-top: 408px;
+    margin-bottom: 222px;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .notfound__container {
+    max-width: 300px;
+    margin-top: 329px;
+  }
+
+  .notfound__header {
+    font-size: 80px;
+  }
+
+  .notfound__subtitle {
+    margin: 10px 0 284px;
+    font-size: 12px;
+  }
+
+  .notfound__link {
+    font-size: 12px;
+  }
+}
