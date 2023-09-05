@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/movies" element={<Movies />} />
-          <Route pat="/saved-movies" element={<SavedMovies />} />
+          <Route path="/saved-movies" element={<SavedMovies />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/signin" element={<Login />} />
           <Route path="/signup" element={<Register />} />

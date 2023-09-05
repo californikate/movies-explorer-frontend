@@ -17,9 +17,15 @@ function Header({ loggedIn }) {
         <Link to={"/"} className="header__logo-link">
           <img className="header__logo" src={ logo } alt="логотип сайта." />
         </Link>
-        <div className="header__nav">
         
-        </div>
+        { loggedIn ? (
+          <Navigation />
+        ) : (
+          <div className="header_nav">
+            <Link to="/signup" className="header__link">Регистрация</Link>
+            <Link to="/signin" className="header__link">Войти</Link>
+          </div>
+        )}
       </div>
     </header>
   )
