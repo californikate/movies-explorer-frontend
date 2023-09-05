@@ -2,15 +2,13 @@
 
 import './Login.css';
 import { Link } from "react-router-dom";
-import logo from '../../images/logo.svg';
+import Logo from '../Logo/Logo';
 
 function Login() {
   return(
     <section className="auth">
       <form className="auth__form" action="#">
-        <Link className="auth__logo-link" to={"/"}>
-          <img className="auth__logo" src={ logo } alt="логотип сайта." />
-        </Link>
+        <Logo />
         <h2 className="auth__title">Рады видеть!</h2>
         <label for="email" className="auth__form-label">E-mail</label>
         <input 

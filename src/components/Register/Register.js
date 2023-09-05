@@ -2,14 +2,12 @@
 
 import './Register.css';
 import { Link } from "react-router-dom";
-import logo from '../../images/logo.svg';
+import Logo from '../Logo/Logo';
 
 function Register() {
   return(
     <section className="auth">
-      <Link className="auth__logo-link" to={"/"}>
-        <img className="auth__logo" src={ logo } alt="логотип сайта." />
-      </Link>
+      <Logo />
       <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" action="#">
         <label for="name" className="auth__form-label">Имя</label>

@@ -6,26 +6,26 @@
 
 import React from "react";
 import './Header.css';
-import { Link } from "react-router-dom";
-import logo from '../../images/logo.svg';
+import { Link } from 'react-router-dom';
+import Logo from '../Logo/Logo';
 import Navigation from "../Navigation/Navigation";
 
 function Header({ loggedIn }) {
   return(
     <header className="header">
       <div className="header__container">
-        <Link to={"/"} className="header__logo-link">
-          <img className="header__logo" src={ logo } alt="логотип сайта." />
-        </Link>
+        <Logo />
+
+        <Navigation />
         
-        { loggedIn ? (
+        {/* { loggedIn ? (
           <Navigation />
         ) : (
           <div className="header_nav">
             <Link to="/signup" className="header__link">Регистрация</Link>
             <Link to="/signin" className="header__link">Войти</Link>
           </div>
-        )}
+        )} */}
       </div>
     </header>
   )
