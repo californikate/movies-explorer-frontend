@@ -1,13 +1,47 @@
 .nav {
-  border: 1px solid #000;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.nav__table {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav__profile-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  margin: 0;
+}
+
+.nav__table-item {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28;
 }
 
 .nav__icon {
-  border: 1px solid #000;
+  background: url('../../images/icon-main-color.svg') no-repeat center;
   background-color: #000;
-  
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
 }
 
-.nav__icon_color {
-
+.nav__icon_type_bw {
+  background: url('../../images/icon-main-bw.svg') no-repeat center;
+  background-color: #F9F9F9;
 }
