@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 function Profile() {
   return(
     <>
-      <Header />
+      <Header loggedIn={ true } />
 
       <section className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>

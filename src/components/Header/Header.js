@@ -6,26 +6,28 @@
 
 import React from "react";
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import Navigation from "../Navigation/Navigation";
 
 function Header({ loggedIn }) {
+  const { pathname } = useLocation();
+
   return(
-    <header className="header">
+    <header className={ pathname === "/" ? "header" : "header header_theme_bw" }>
       <div className="header__container">
         <Logo />
-
+        <Navigation />
 
         
-        { loggedIn ? (
+        {/* { loggedIn ? (
           <Navigation />
         ) : (
           <div className="header_nav">
             <Link to="/signup" className="header__link">Регистрация</Link>
             <Link to="/signin" className="header__button">Войти</Link>
           </div>
-        )}
+        )} */}
       </div>
     </header>
   )

@@ -2,22 +2,25 @@
 
 import React from 'react';
 import './Navigation.css';
-
-import icon from '../../images/icon-main-color.svg';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function Navigation() {
+  const { pathname } = useLocation();
+
   return (
     <section className="nav">
       <ul className="nav__table">
-        <li className="nav__table-item">Фильмы</li>
-        <li className="nav__table-item">Сохраненные фильмы</li>
+        <li>
+          <Link to={"/movies"} className="nav__table-item">Фильмы</Link>
+        </li>
+        <li>
+          <Link to={"/saved-movies"} className="nav__table-item">Сохраненные фильмы</Link>
+        </li>
       </ul>
       <Link to={"/profile"} className="nav__profile-link">
         <p className="nav__profile-text">Аккаунт</p>
-        <span className="nav__icon"/>
+        <span className={ pathname === "/" ? "nav__icon" : "nav__icon nav__icon_type_bw" }/>
       </Link>
-      
     </section>
   );
 }
