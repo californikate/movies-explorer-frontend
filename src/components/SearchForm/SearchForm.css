@@ -1,4 +1,5 @@
 .search-form__container {
+  position: relative;
   max-width: 1140px;
   margin: 70px;
 }
@@ -57,4 +58,28 @@
   font-weight: 500;
   font-size: 11px;
   line-height: 1.63;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form__container {
+    max-width: 708px;
+    margin: 80px 30px 120px;
+  }
+
+  .search-form__form {
+    justify-content: center;
+    padding-right: 20px;
+    gap: 21px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .search-form__container {
+    max-width: 300px;
+    margin: 80px 10px 120px;
+  }
+
+  .search-form__form {
+    flex-direction: column;
+  }
 }

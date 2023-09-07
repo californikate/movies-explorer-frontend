@@ -50,3 +50,11 @@
 .filter-checkbox__input:checked + .filter-checkbox__text::before {
   background-color: #2BE080;
 }
+
+
+@media screen and (max-width: 620px) {
+  .filter-checkbox {
+    position: absolute;
+    top: 120px;
+  }
+}
