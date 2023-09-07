@@ -17,17 +17,15 @@ function Header({ loggedIn }) {
     <header className={ pathname === "/" ? "header" : "header header_theme_bw" }>
       <div className="header__container">
         <Logo />
-        <Navigation />
 
-        
-        {/* { loggedIn ? (
+        { loggedIn ? (
           <Navigation />
         ) : (
           <div className="header_nav">
             <Link to="/signup" className="header__link">Регистрация</Link>
             <Link to="/signin" className="header__button">Войти</Link>
           </div>
-        )} */}
+        )}
       </div>
     </header>
   )

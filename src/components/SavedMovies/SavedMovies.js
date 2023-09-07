@@ -11,9 +11,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function SavedMovies() {
   return(
     <section className="saved-movies">
-      <Header />
+      <Header loggedIn={ true } />
+
       <SearchForm />
       <MoviesCardList />
+      
       <Footer />
     </section>
   );

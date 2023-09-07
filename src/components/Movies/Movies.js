@@ -11,9 +11,11 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function Movies() {
   return(
     <section className="movies">
-      <Header />
+      <Header loggedIn={ true } />
+
       <SearchForm />
       <MoviesCardList />
+      
       <Footer />
     </section>
   );
