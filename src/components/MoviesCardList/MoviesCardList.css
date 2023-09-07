@@ -1,0 +1,18 @@
+.movies-cardlist__container {
+  box-sizing: border-box;
+  padding: 0 70px;
+  width: 100%;
+  min-height: 45vh;
+}
+
+.movies-cardlist__table {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 360px);
+  row-gap: 59px;
+  column-gap: 30px;
+
+  padding: 80px 0 0;
+  margin: 0;
+  border-top: 1px solid #E8E8E8;
+  list-style: none;
+}
