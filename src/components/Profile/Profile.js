@@ -1,9 +1,13 @@
 // компонент страницы изменения профиля
+import React from 'react';
 import './Profile.css';
-
 import Header from '../Header/Header';
 
+import { useNavigate } from 'react-router-dom';
+
 function Profile() {
+  const navigate = useNavigate();
+
   return(
     <>
       <Header loggedIn={ true } />
@@ -44,9 +48,17 @@ function Profile() {
             <button type="button" className="profile__edit-button button">Редактировать</button>
           </li>
           <li>
-            <button type="button" className="profile__exit-button">Выйти из аккаунта</button>
+            <button type="button" className="profile__exit-button" onClick={ () => navigate('/') }>Выйти из аккаунта</button>
           </li>
         </ul>
+
+          
+          <button className="profile__buttons_type_save">Сохранить</button>
+          <div className="profile__error">
+            <span className="profile__error-span">При обновлении профиля произошла ошибка.</span>
+            <button className="profile__buttons_type_error">Сохранить</button>
+          </div>
+          
       </section>
     </>
   );
