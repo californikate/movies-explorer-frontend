@@ -2,7 +2,6 @@
   margin: 70px auto;
   display: flex;
   flex-direction: column;
-
 }
 
 .auth__title {
@@ -13,7 +12,7 @@
 }
 
 .auth__form {
-  width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 396px;
@@ -42,8 +41,9 @@
 }
 
 .auth__form-error {
+  position: absolute;
+  top: 276px;
   color: #FF4062;
-  margin: 12px 0 68px;
 
   font-weight: 400;
   font-size: 10px;
@@ -55,6 +55,7 @@
   border: none;
   border-radius: 3px;
   padding: 15px;
+  margin-top: 91px;
 
   color: #fff;
   font-weight: 500;
@@ -70,14 +71,15 @@
   display: flex;
   gap: 6px;
   justify-content: center;
-  margin: 16px 0 70px;
+  margin: 16px 0 0;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .auth__link-span {
   color: #A0A0A0;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.2;
 }
 
 .auth__link {
@@ -85,7 +87,40 @@
   margin: 0;
 
   color: #000;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.2;
+}
+
+@media screen and (max-width: 768px) {
+  .auth {
+    margin: 232px auto;
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .auth {
+    margin: 56px auto 30px;
+    align-items: center;
+  }
+
+  .auth__form {
+    width: 260px;
+  }
+
+  .auth__link-wrap {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .auth__title {
+    margin: 46px 0 60px;
+  }
+
+  .auth__button {
+    margin-top: 180px;
+    font-size: 12px;
+  }
+
+  .auth__button_type_signin {
+    margin-top: 268px;
+  }
 }
