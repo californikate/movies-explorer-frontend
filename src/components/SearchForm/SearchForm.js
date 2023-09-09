@@ -4,11 +4,7 @@ import React from "react";
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-import { useState } from "react";
-
 function SearchForm() {
-  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
-  
   return (
     <section className="search-form">
       <div className="search-form__container">

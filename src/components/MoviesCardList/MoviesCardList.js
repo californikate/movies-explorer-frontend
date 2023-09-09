@@ -17,7 +17,7 @@ function MoviesCardList() {
         <ul className="movies-cardlist__table">
           {Movies.map((card) => {
             return (
-              <li key={ card._id }>
+              <li key={ card.id }>
                 <MoviesCard movie={ card } />
               </li>
             )

@@ -55,6 +55,13 @@
 @media screen and (max-width: 620px) {
   .filter-checkbox {
     position: absolute;
-    top: 120px;
+    top: 118px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .filter-checkbox__text {
+    font-size: 11px;
+    line-height: 1.63;
   }
 }
