@@ -60,7 +60,7 @@
 }
 
 .profile__edit-button {
-  margin: 0 auto 14px;
+  margin: 0 auto 16px;
   font-weight: 400;
 
   width: 100%;
@@ -160,7 +160,7 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 320px) {
   .profile__header {
     margin-bottom: 64px;
   }

@@ -1,0 +1,135 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+
+  width: 100%;
+  height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  z-index: 99;
+}
+
+.navbar_opened {
+  height: 100%;
+}
+
+.navbar__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 520px;
+  height: 100%;
+  background-color: #fff;
+
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(100%);
+  opacity: 1;
+}
+
+.navbar__content_active {
+  transform: translateX(0);
+}
+
+.navbar__overlay {
+  position: fixed;
+  height: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background: rgba(0, 0, 0, .3);
+  transition: opacity 0.4s ease-in-out;
+  opacity: 0;
+}
+
+.navbar__overlay_opened {
+  height: 100%;
+  opacity: 1;
+}
+
+.navbar__close-button {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  margin: 27px 27px;
+  align-self: flex-end;
+
+  background: url('../../../images/burger-close-icon.svg') center no-repeat;
+  border: none;
+}
+
+.navbar__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding: 0;
+  margin: 84px 0 0;
+  gap: 28px;
+
+  list-style: none;
+}
+
+.navbar__item {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.navbar__item-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar__profile-link {
+  margin-top: 620px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.navbar__profile-text {
+  margin: 0;
+  color: #000;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.navbar__profile-icon {
+  background: url('../../../images/icon-main-bw.svg') no-repeat center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: #F9F9F9;
+}
+
+@media screen and (max-width: 320px) {
+  .navbar__content {
+    width: 100%;
+  }
+
+  .navbar__close-button {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    margin: 17px 18px;
+    align-self: flex-end;
+  }
+
+  .navbar__table {
+    margin-top: 90px;
+    gap: 24px;
+  }
+
+  .navbar__profile-link {
+    margin-top: 444px;
+  }
+}

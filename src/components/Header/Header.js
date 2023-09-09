@@ -17,7 +17,7 @@ function Header({ loggedIn }) {
     <header className={ pathname === "/" ? "header" : "header header_theme_bw" }>
       <div className="header__container">
         <Logo />
-
+        
         { loggedIn ? (
           <Navigation />
         ) : (
