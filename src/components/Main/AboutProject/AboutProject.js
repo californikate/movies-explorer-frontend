@@ -22,7 +22,7 @@ function AboutProject() {
             </p>
           </li>
         </ul>
-        <ul className="about-project__timeline">
+        <ul className="about-project__timeline list">
             <li className="about-project__timeline-item about-project__timeline-item_one">1 неделя</li>
             <li className="about-project__timeline-item about-project__timeline-item_four">4 недели</li>
             <li className="about-project__timeline-item_name">Back-end</li>

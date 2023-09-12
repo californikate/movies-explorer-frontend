@@ -14,7 +14,6 @@
 
 .portfolio__table {
   padding: 0;
-  list-style: none;
 }
 
 .portfolio__table-item {
@@ -34,7 +33,6 @@
 
 .portfolio__table-link {
   color: #000;
-  text-decoration: none;
 
   display: flex;
   justify-content: space-between;

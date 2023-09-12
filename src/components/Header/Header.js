@@ -22,8 +22,8 @@ function Header({ loggedIn }) {
           <Navigation />
         ) : (
           <div className="header_nav">
-            <Link to="/signup" className="header__link">Регистрация</Link>
-            <Link to="/signin" className="header__button">Войти</Link>
+            <Link to="/signup" className="header__link link">Регистрация</Link>
+            <Link to="/signin" className="header__button button">Войти</Link>
           </div>
         )}
       </div>

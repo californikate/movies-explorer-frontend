@@ -2,7 +2,7 @@
 
 import React from 'react';
 import './Navigation.css';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 import { useState  } from 'react';
 
 import Navbar from './Navbar/Navbar';
@@ -13,20 +13,20 @@ function Navigation() {
 
   return (
     <nav className="nav">
-      <ul className="nav__table">
+      <ul className="nav__table list">
         <li>
-          <Link to={"/movies"} className="nav__table-item">Фильмы</Link>
+          <NavLink to={"/movies"} className="nav__table-item link">Фильмы</NavLink>
         </li>
         <li>
-          <Link to={"/saved-movies"} className="nav__table-item">Сохраненные фильмы</Link>
+          <NavLink to={"/saved-movies"} className="nav__table-item link">Сохраненные фильмы</NavLink>
         </li>
       </ul>
-      <Link to={"/profile"} className="nav__profile-link">
+      <Link to={"/profile"} className="nav__profile-link link">
         <p className="nav__profile-text">Аккаунт</p>
         <span className={ pathname === "/" ? "nav__icon" : "nav__icon nav__icon_type_bw" }/>
       </Link>
 
-      <button onClick={ setIsOpenPopup } type="button" className="nav__burger-button"/>
+      <button onClick={ setIsOpenPopup } type="button" className="nav__burger-button button"/>
       <Navbar isOpen={ isOpenPopup } onClose={() => setIsOpenPopup(false)} />
     </nav>
   );

@@ -60,7 +60,6 @@
   align-self: flex-end;
 
   background: url('../../../images/burger-close-icon.svg') center no-repeat;
-  border: none;
 }
 
 .navbar__table {
@@ -71,8 +70,6 @@
   padding: 0;
   margin: 84px 0 0;
   gap: 28px;
-
-  list-style: none;
 }
 
 .navbar__item {
@@ -82,13 +79,15 @@
 }
 
 .navbar__item-link {
-  text-decoration: none;
   color: #000;
+}
+
+.navbar__item-link.active {
+  border-bottom: 2px solid #000;
 }
 
 .navbar__profile-link {
   margin-top: 620px;
-  text-decoration: none;
   display: flex;
   align-items: center;
   gap: 13px;

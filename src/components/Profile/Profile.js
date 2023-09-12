@@ -26,7 +26,7 @@ function Profile() {
               defaultValue={"Виталий" || ""}
               className="profile__form-input"
               required
-              disabled
+              //disabled
             />
           </div>
           <div className="profile__form-wrap">
@@ -38,25 +38,25 @@ function Profile() {
               defaultValue={"pochta@yandex.ru" || ""}
               className="profile__form-input"
               required
-              disabled
+              //disabled
             />
           </div>
         </form>
 
-        <ul className="profile__buttons">
+        <ul className="profile__buttons list">
           <li>
             <button type="button" className="profile__edit-button button">Редактировать</button>
           </li>
           <li>
-            <button type="button" className="profile__exit-button" onClick={ () => navigate("/") }>Выйти из аккаунта</button>
+            <button type="button" className="profile__exit-button button" onClick={ () => navigate("/") }>Выйти из аккаунта</button>
           </li>
         </ul>
 
           
-          <button className="profile__buttons_type_save">Сохранить</button>
+          <button className="profile__buttons_type_save button">Сохранить</button>
           <div className="profile__error">
             <span className="profile__error-span">При обновлении профиля произошла ошибка.</span>
-            <button className="profile__buttons_type_error">Сохранить</button>
+            <button className="profile__buttons_type_error button">Сохранить</button>
           </div>
           
       </section>

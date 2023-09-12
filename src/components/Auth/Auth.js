@@ -50,14 +50,14 @@ function Auth({ type }) {
           <span className="auth__form-error">Что-то пошло не так...</span>
         )}
         
-        <button type="submit" className={ type === "signin" ? "auth__button auth__button_type_signin" : "auth__button" }>
+        <button type="submit" className={ type === "signin" ? "auth__button auth__button_type_signin button" : "auth__button button" }>
           { type === "signin" ? "Войти" : "Зарегистрироваться" }
         </button>
         <div className="auth__link-wrap">
           <span className="auth__link-span">
             { type === "signin" ? "Еще не зарегистрированы?" : "Уже зарегистрированы?" }
           </span>
-          <Link to={ type === "signin" ? "/signup" : "/signin" } className="auth__link">
+          <Link to={ type === "signin" ? "/signup" : "/signin" } className="auth__link link">
             { type === "signin" ? "Регистрация" : "Войти" }
           </Link>
         </div>

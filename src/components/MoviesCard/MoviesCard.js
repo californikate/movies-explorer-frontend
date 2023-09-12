@@ -2,8 +2,7 @@
 import React from 'react';
 import './MoviesCard.css';
 
-import saveButton from '../../images/save-button.svg';
-import deleteButton from '../../images/delete-button.svg';
+import savedIcon from '../../images/save-button.svg';
 
 import { useLocation } from "react-router-dom";
 
@@ -16,11 +15,11 @@ function MoviesCard({ movie }) {
 
   const movieCardButton = 
     pathname === "/saved-movies" ? (
-      <button type="button" className="movies-card__button movies-card__button_type_delete" />
+      <button type="button" className="movies-card__button movies-card__button_type_delete button" />
     ) : isSave ? (
-      <img src={ saveButton } alt="Сохранено" className="movies-card__button" />
+      <img src={ savedIcon } alt="Сохранено" className="movies-card__button" />
     ) : (
-      <button type="button" className="movies-card__button movies-card__button_type_save">Сохранить</button>
+      <button type="button" className="movies-card__button movies-card__button_type_save button">Сохранить</button>
     );
 
   return (

@@ -12,7 +12,8 @@
   aspect-ratio: 9/5;
 
   display: block;
-  background-color: rgba(0, 0, 0, .1)
+  background-color: rgba(0, 0, 0, .1);
+  cursor: pointer;
 }
 
 .movies-card__button {
@@ -25,7 +26,6 @@
   min-width: 72px;
   border-radius: 30px;
   background: #F9F9F9;
-  border: none;
   padding: 6px 7px;
 
   font-weight: 400;
@@ -37,7 +37,6 @@
   background: url('../../images/delete-button.svg') center no-repeat;
   width: 21px;
   height: 21px;
-  border: none;
 }
 
 .movies-card__info {

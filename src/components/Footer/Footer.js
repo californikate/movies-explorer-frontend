@@ -15,14 +15,14 @@ function Footer() {
             <Link
               to={ "https://practicum.yandex.ru/" }
               target="_blank"
-              className="footer__link"
+              className="footer__link link"
             >
               Яндекс.Практикум
             </Link>
             <Link
               to={ "https://github.com/californikate" }
               target="_blank"
-              className="footer__link"
+              className="footer__link link"
             >
               Github
             </Link>

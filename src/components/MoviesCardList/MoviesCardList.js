@@ -15,7 +15,7 @@ function MoviesCardList() {
   return (
     <section className="movies-cardlist">
       <div className="movies-cardlist__container">
-        <ul className="movies-cardlist__table">
+        <ul className="movies-cardlist__table list">
           {Movies.map((card) => {
             return (
               <li key={ card.movieId }>

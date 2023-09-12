@@ -52,8 +52,6 @@
   grid-template-columns: 1fr 4fr;
   grid-template-rows: repeat(2, 36px);
   row-gap: 14px;
-
-  list-style: none;
   text-align: center;
 }
 
