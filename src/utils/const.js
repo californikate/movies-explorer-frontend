@@ -3,7 +3,7 @@ import image from '../images/pic__COLOR_pic.png';
 const Movies = [
   {
     duration: 77,
-    link: image,
+    link: undefined,
     movieId: 1,
     name: '33 слова о дизайне',
     isSave: false,
@@ -19,7 +19,7 @@ const Movies = [
     duration: 77,
     link: image,
     movieId: 3,
-    name: 'В погоне за Бенкси',
+    name: 'Gimme Danger: История Игги и The Stooges',
     isSave: false,
   },
   {

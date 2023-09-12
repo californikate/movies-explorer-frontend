@@ -15,16 +15,12 @@ function MoviesCard({ movie }) {
   const minutes = duration % 60;
 
   const movieCardButton = 
-    pathname === "/saved-movies" && isSave ? (
+    pathname === "/saved-movies" ? (
       <button type="button" className="movies-card__button movies-card__button_type_delete" />
     ) : isSave ? (
       <img src={ saveButton } alt="Сохранено" className="movies-card__button" />
     ) : (
-      pathname === "/movies" ? (
-        <button type="button" className="movies-card__button movies-card__button_type_save">Сохранить</button>
-      ) : (
-        null
-      )
+      <button type="button" className="movies-card__button movies-card__button_type_save">Сохранить</button>
     );
 
   return (
