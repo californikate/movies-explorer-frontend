@@ -4,9 +4,10 @@ import React from "react";
 import './MoviesCardList.css';
 
 import { useLocation } from "react-router-dom";
-import  Movies from "../../utils/const";
+import Movies from "../../utils/const";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
+import MoreButton from "./MoreButton/MoreButton";
 
 function MoviesCardList() {
   const { pathname } = useLocation();
@@ -17,17 +18,17 @@ function MoviesCardList() {
         <ul className="movies-cardlist__table">
           {Movies.map((card) => {
             return (
-              <li key={ card.id }>
+              <li key={ card.movieId }>
                 <MoviesCard movie={ card } />
               </li>
             )
           })}
         </ul>
         
-        <button type="button" className="movies-cardlist__button button">
-            Ещё
-        </button>
-        <Preloader />
+        <div className="movies-cardlist__loading">
+          { pathname === "/movies" ? <MoreButton /> : null }
+          { false ? <Preloader /> : null }
+        </div>
       </div>
     </section>
   );
