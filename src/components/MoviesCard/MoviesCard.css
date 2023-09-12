@@ -49,10 +49,15 @@
 
 .movies-card__title {
   margin: 0;
+  max-width: 250px;
 
   font-weight: 500;
   font-size: 13px;
   line-height: 1.2;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .movies-card__duration {

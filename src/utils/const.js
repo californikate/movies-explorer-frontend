@@ -12,14 +12,14 @@ const Movies = [
     duration: 77,
     link: image,
     movieId: 2,
-    name: 'Киноальманах «100 лет дизайна»',
+    name: 'Киноальманах «100 лет дизайна»Киноальманах «100 лет дизайна»',
     isSave: true,
   },
   {
     duration: 77,
     link: image,
     movieId: 3,
-    name: 'Gimme Danger: История Игги и The Stooges',
+    name: 'Киноальманах «100 лет дизайна»',
     isSave: false,
   },
   {
@@ -35,13 +35,6 @@ const Movies = [
     movieId: 5,
     name: 'Киноальманах «100 лет дизайна»',
     isSave: true,
-  },
-  {
-    duration: 15,
-    link: image,
-    movieId: 6,
-    name: 'В погоне за Бенкси',
-    isSave: false,
   },
 ];
 

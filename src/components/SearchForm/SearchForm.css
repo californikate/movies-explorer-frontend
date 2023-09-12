@@ -63,7 +63,7 @@
 @media screen and (max-width: 768px) {
   .search-form__container {
     max-width: 708px;
-    margin: 80px 30px 120px;
+    margin: 80px 30px 109px;
   }
 
   .search-form__form {
@@ -75,7 +75,7 @@
 
 @media screen and (max-width: 620px) {
   .search-form__container {
-    margin: 80px 10px 120px;
+    margin: 80px 10px 109px;
     max-width: 600px;
   }
 
