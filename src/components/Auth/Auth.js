@@ -6,11 +6,11 @@ import Logo from '../Logo/Logo';
 
 function Auth({ type }) {
   return (
-    <section className="auth">
+    <main className="auth">
       <Logo />
-      <h2 className="auth__title">
+      <h1 className="auth__title">
         { type === "signin" ? "Рады видеть!" : "Добро пожаловать!" }
-      </h2>
+      </h1>
       <form className="auth__form" action="#">
         { type !== "signin" && (
           <>
@@ -41,6 +41,8 @@ function Auth({ type }) {
           id="password" 
           name="password" 
           type="password"
+          minLength="6"
+          maxLength="25"
           placeholder="••••••••••••••"
           className="auth__form-input"
           required
@@ -62,7 +64,7 @@ function Auth({ type }) {
           </Link>
         </div>
       </form>
-    </section>
+    </main>
   );
 }
 

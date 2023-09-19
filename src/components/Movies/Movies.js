@@ -12,10 +12,10 @@ function Movies() {
   return(
     <section className="movies">
       <Header loggedIn={ true } />
-
-      <SearchForm />
-      <MoviesCardList />
-      
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
     </section>
   );

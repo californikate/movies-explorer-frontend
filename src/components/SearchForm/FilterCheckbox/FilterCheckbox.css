@@ -4,6 +4,10 @@
   cursor: pointer;
 }
 
+.filter-checkbox:hover {
+  opacity: .7;
+}
+
 .filter-checkbox__input {
   display: none;
 }

@@ -21,10 +21,10 @@ function Header({ loggedIn }) {
         { loggedIn ? (
           <Navigation />
         ) : (
-          <div className="header_nav">
+          <nav className="header_nav">
             <Link to="/signup" className="header__link link">Регистрация</Link>
             <Link to="/signin" className="header__button button">Войти</Link>
-          </div>
+          </nav>
         )}
       </div>
     </header>

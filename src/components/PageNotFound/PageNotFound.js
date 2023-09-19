@@ -3,13 +3,13 @@ import './PageNotFound.css';
 
 function PageNotFound() {
   return(
-    <section className="notfound">
+    <main className="notfound">
       <div className="notfound__container">
         <h1 className="notfound__header">404</h1>
         <p className="notfound__subtitle">Страница не найдена</p>
         <Link to={"/"} className="notfound__link link">Назад</Link>
       </div>
-    </section>
+    </main>
   );
 }
 

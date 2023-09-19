@@ -12,10 +12,10 @@ function SavedMovies() {
   return(
     <section className="saved-movies">
       <Header loggedIn={ true } />
-
-      <SearchForm />
-      <MoviesCardList />
-      
+      <main>
+        <SearchForm />
+        <MoviesCardList />
+      </main>
       <Footer />
     </section>
   );

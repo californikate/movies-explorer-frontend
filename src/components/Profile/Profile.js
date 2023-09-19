@@ -12,7 +12,7 @@ function Profile() {
     <>
       <Header loggedIn={ true } />
 
-      <section className="profile">
+      <main className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>
         <form className="profile__form">
           <div className="profile__form-wrap">
@@ -23,6 +23,7 @@ function Profile() {
               type="text"
               minLength="2"
               maxLength="30"
+              placeholder="Виталий"
               defaultValue={"Виталий" || ""}
               className="profile__form-input"
               required
@@ -35,6 +36,7 @@ function Profile() {
               id="email"
               name="email"
               type="email"
+              placeholder="pochta@yandex.ru"
               defaultValue={"pochta@yandex.ru" || ""}
               className="profile__form-input"
               required
@@ -53,13 +55,13 @@ function Profile() {
         </ul>
 
           
-          <button className="profile__buttons_type_save button">Сохранить</button>
+          <button type="submit" className="profile__buttons_type_save button">Сохранить</button>
           <div className="profile__error">
             <span className="profile__error-span">При обновлении профиля произошла ошибка.</span>
-            <button className="profile__buttons_type_error button">Сохранить</button>
+            <button type="submit" className="profile__buttons_type_error button">Сохранить</button>
           </div>
           
-      </section>
+      </main>
     </>
   );
 }
