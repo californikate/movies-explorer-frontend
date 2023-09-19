@@ -21,7 +21,7 @@ function Auth({ type }) {
               type="name"
               minLength="2"
               maxLength="30"
-              placeholder="Виталий"
+              placeholder="Введите имя"
               className="auth__form-input"
               required
             />
@@ -32,7 +32,7 @@ function Auth({ type }) {
           id="email"
           name="email"
           type="email"
-          placeholder="pochta@yandex.ru"
+          placeholder="Введите email"
           className="auth__form-input"
           required
         />

@@ -5,9 +5,14 @@ import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+  }
+
   return (
     <section className="search-form">
-      <div className="search-form__container">
+      <div onSubmit={ (evt) => handleSubmit(evt) }className="search-form__container">
         <form className="search-form__form">
           <div className="search-form__wrap">
           <span className="search-form__icon" />
