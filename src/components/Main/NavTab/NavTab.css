@@ -1,0 +1,33 @@
+.navtab {
+  background-color: #000;
+}
+
+.navtab__table {
+  display: flex;
+  margin: 0 auto;
+  padding: 24px 0;
+
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.navtab__table-link {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 420px) {
+  .navtab__table {
+    gap: 24px;
+  }
+
+  .navtab__table-link {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+}

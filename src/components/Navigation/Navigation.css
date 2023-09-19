@@ -1,0 +1,81 @@
+.nav {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.nav__table {
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav__table-item {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.28;
+
+  color: #000;
+  text-decoration: none;
+}
+
+.nav__table-item.active {
+  font-weight: 500;
+}
+
+.nav__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #000;
+}
+
+.nav__profile-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.14;
+  margin: 0;
+}
+
+.nav__icon {
+  background: url('../../images/icon-main-color.svg') no-repeat center;
+  background-color: #000;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.nav__icon_type_bw {
+  background: url('../../images/icon-main-bw.svg') no-repeat center;
+  background-color: #F9F9F9;
+}
+
+.nav__burger-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: url('../../images/burger-icon.svg') center no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+  .nav__table {
+    display: none;
+  }
+
+  .nav__profile-link {
+    display: none;
+  }
+
+  .nav__burger-button {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .nav__burger-button {
+    width: 40px;
+    height: 43px;
+  }
+}
