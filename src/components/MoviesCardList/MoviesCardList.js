@@ -4,22 +4,21 @@ import React from "react";
 import './MoviesCardList.css';
 
 import { useLocation } from "react-router-dom";
-import Movies from "../../utils/const";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import MoreButton from "./MoreButton/MoreButton";
 
-function MoviesCardList() {
+function MoviesCardList({ moviesList }) {
   const { pathname } = useLocation();
 
   return (
     <section className="movies-cardlist">
       <div className="movies-cardlist__container">
         <ul className="movies-cardlist__table list">
-          {Movies.map((card) => {
+          { moviesList.map((movie) => {
             return (
-              <li key={ card.movieId }>
-                <MoviesCard movie={ card } />
+              <li key={ movie.movieId }>
+                <MoviesCard movie={ movie } />
               </li>
             )
           })}

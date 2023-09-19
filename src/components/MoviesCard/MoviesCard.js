@@ -4,10 +4,10 @@ import './MoviesCard.css';
 
 import savedIcon from '../../images/save-button.svg';
 
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function MoviesCard({ movie }) {
-  const { duration, link, name, isSave } = movie;
+  const { duration, image, nameRU, isSave,trailerLink } = movie;
   const { pathname } = useLocation();
 
   const hours = Math.floor(duration / 60);
@@ -25,11 +25,13 @@ function MoviesCard({ movie }) {
   return (
     <article className="movies-card">
       { movieCardButton }
-      <img className="movies-card__img" src={ link } alt={ name } />
-      <div className="movies-card__info">
-        <h2 className="movies-card__title">{ name }</h2>
-        <span className="movies-card__duration">{ !!hours && `${hours}ч` } {`${minutes}м` }</span>
-      </div>
+      <Link to={ trailerLink } target="_blank" className="movies-card__link link">
+        <img className="movies-card__img" src={ image.url ? `https://api.nomoreparties.co${image.url}` : image} alt={ nameRU } />
+        <div className="movies-card__info">
+          <h2 className="movies-card__title">{ nameRU }</h2>
+          <span className="movies-card__duration">{ !!hours && `${hours}ч` } {`${minutes}м` }</span>
+        </div>
+      </Link>
     </article>
   );
 }

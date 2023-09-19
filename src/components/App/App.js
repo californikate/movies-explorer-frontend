@@ -14,19 +14,22 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+
   return (
     <CurrenUserContext.Provider value={ currentUser }>
       <div className="App">
         <div className="page">
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/movies" element={<Movies />} />
-            <Route path="/saved-movies" element={<SavedMovies />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/signin" element={<Auth type="signin" />} />
-            <Route path="/signup" element={<Auth type="signup" />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
+          <main className="main">
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/movies" element={<Movies />} />
+              <Route path="/saved-movies" element={<SavedMovies />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/signin" element={<Auth type="signin" />} />
+              <Route path="/signup" element={<Auth type="signup" />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </main>
         </div>
       </div>
     </CurrenUserContext.Provider>
