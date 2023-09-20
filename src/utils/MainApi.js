@@ -67,32 +67,6 @@ class Api {
     }).then(res => this._getResponse(res))
   };
 
-  async register(data) {
-    return fetch(`${this._url}/signup`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify(data)
-    })
-    .then(res => this._getResponse(res))
-  };
-  
-  async authorize(email, password) {
-    return fetch(`${this._url}/signin`, {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify({ email, password })
-    })
-    .then(res => this._getResponse(res))
-  };
-
   async checkToken() {
     return fetch(`${this._url}/users/me`, {
       method: 'GET',

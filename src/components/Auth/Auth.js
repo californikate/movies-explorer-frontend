@@ -1,28 +1,56 @@
 import React from "react";
 import './Auth.css';
-
-import { Link } from "react-router-dom";
 import Logo from '../Logo/Logo';
 
-function Auth({ type }) {
+import { Link } from "react-router-dom";
+import { useState } from "react";
+
+
+function Auth({ type, handleRegister, handleAuthorize }) {
+  const [formValue, setFormValue] = useState({
+    name: '',
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setFormValue({
+      ...formValue,
+      [name]: value
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    type !== 'signin' && handleRegister(formValue);
+    type === 'signin' && handleAuthorize(formValue);
+
+    setFormValue({email: '', password: ''});
+  }
+
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">
         { type === "signin" ? "Рады видеть!" : "Добро пожаловать!" }
       </h1>
-      <form className="auth__form" action="#">
+      <form onSubmit={ handleSubmit } className="auth__form" action="#">
         { type !== "signin" && (
           <>
             <label for="name" className="auth__form-label">Имя</label>
             <input 
               id="name"
               name="name"
-              type="name"
+              type="text"
               minLength="2"
               maxLength="30"
               placeholder="Введите имя"
               className="auth__form-input"
+              value={ formValue.name} 
+              onChange={ handleChange } 
               required
             />
           </>
@@ -34,6 +62,8 @@ function Auth({ type }) {
           type="email"
           placeholder="Введите email"
           className="auth__form-input"
+          value={ formValue.email } 
+          onChange={ handleChange }
           required
         />
         <label for="password" className="auth__form-label">Пароль</label>
@@ -42,9 +72,11 @@ function Auth({ type }) {
           name="password" 
           type="password"
           minLength="6"
-          maxLength="25"
+          maxLength="30"
           placeholder="••••••••••••••"
           className="auth__form-input"
+          value={ formValue.password } 
+          onChange={ handleChange }
           required
         />
 
