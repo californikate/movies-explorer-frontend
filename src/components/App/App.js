@@ -19,17 +19,20 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') || false)
   const navigate = useNavigate();
 
   useEffect(() => {
     handleTokenCheck();
   }, []);
 
-  function handleRegister({ name, email, password }) {
-    auth.register(name, email, password)
-      .then(() => {
-        navigate('/sign-in');
+  function handleRegister(data) {
+    auth.register(data)
+      .then((data) => {
+        console.log(data)
+        localStorage.setItem('token', data.token);
+        setLoggedIn(true);
+        navigate('/movies');
       })
       .catch((err) => {
         console.log(err);
@@ -42,7 +45,7 @@ function App() {
         if (data.token) {
           localStorage.setItem('token', data.token);
           setLoggedIn(true);
-          navigate('/');
+          navigate('/movies');
         }
       })
       .catch((err) => {
@@ -62,7 +65,7 @@ function App() {
 
     if(token) {
       auth.getContent(token)
-        .then((res) => {
+        .then(() => {
           setLoggedIn(true);
           navigate('/movies');
         })
@@ -74,12 +77,12 @@ function App() {
   }
 
   return (
-    <CurrenUserContext.Provider value={{ currentUser, setCurrentUser }}>
+    <CurrenUserContext.Provider value={{ currentUser }}>
       <div className="App">
         <div className="page">
           <main className="main">
             <Routes>
-              <Route path="/" element={<Main loggedIn={ loggedIn }/>} />
+              <Route path="/" element={<Main />} />
               <Route path="/movies" element={
                 <ProtectedRoute 
                   loggedIn={ loggedIn }
@@ -98,8 +101,20 @@ function App() {
                   element={ Profile }
                 />
               }/>
-              <Route path="/signin" element={<Auth type="signin" handleAuthorize={ handleAuthorize } />} />
-              <Route path="/signup" element={<Auth type="signup" handleRegister={ handleRegister } />} />
+              <Route path="/signin" element={
+                <Auth 
+                  type="signin" 
+                  handleAuthorize={ handleAuthorize }
+                  authTitle={ "Вход" }
+                />} 
+              />
+              <Route path="/signup" element={
+                <Auth 
+                  type="signup" 
+                  handleRegister={ handleRegister }
+                  authTitle={ "Регистрация" }
+                />} 
+              />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </main>

@@ -11,21 +11,24 @@ class Api {
   };
 
   async getUserInfo() {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/users/me`, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       credentials: 'include',
     }).then(res => this._getResponse(res))
   };
 
   async setUserInfo(data) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: {
-        'Accept': 'application/json',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       credentials: 'include',
@@ -34,21 +37,24 @@ class Api {
   };
 
   async getSavedMovies() {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/movies`, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       credentials: 'include',
     }).then(res => this._getResponse(res))
   };
 
-  async addNewMovie(data) {    
+  async addNewMovie(data) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/movies`, {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
+        authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       credentials: 'include',
@@ -57,28 +63,18 @@ class Api {
   };
 
   async deleteMovie(id) {
+    const token = localStorage.getItem('token');
+
     return fetch(`${this._url}/movies/${id}`, {
       method: 'DELETE',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
       },
       credentials: 'include',
     }).then(res => this._getResponse(res))
   };
-
-  async checkToken() {
-    return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-    }).then(res => this._getResponse(res))
-  }
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3000',
+  baseUrl: 'https://api.nekrasova.nomoreparties.co',
 });

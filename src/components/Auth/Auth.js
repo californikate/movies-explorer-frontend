@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 
-function Auth({ type, handleRegister, handleAuthorize }) {
+function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
@@ -25,18 +25,16 @@ function Auth({ type, handleRegister, handleAuthorize }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    type !== 'signin' && handleRegister(formValue);
-    type === 'signin' && handleAuthorize(formValue);
+    authTitle === 'Регистрация' && handleRegister(formValue);
+    authTitle === 'Вход' && handleAuthorize(formValue);
 
-    setFormValue({email: '', password: ''});
+    setFormValue({name: '', email: '', password: ''});
   }
 
   return (
     <main className="auth">
       <Logo />
-      <h1 className="auth__title">
-        { type === "signin" ? "Рады видеть!" : "Добро пожаловать!" }
-      </h1>
+      <h1 className="auth__title">{ authTitle }</h1>
       <form onSubmit={ handleSubmit } className="auth__form" action="#">
         { type !== "signin" && (
           <>
@@ -49,7 +47,7 @@ function Auth({ type, handleRegister, handleAuthorize }) {
               maxLength="30"
               placeholder="Введите имя"
               className="auth__form-input"
-              value={ formValue.name} 
+              value={ formValue.name } 
               onChange={ handleChange } 
               required
             />

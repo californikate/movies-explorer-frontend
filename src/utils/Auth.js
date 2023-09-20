@@ -1,13 +1,14 @@
-export const BASE_URL = 'http://localhost:3000/';
+export const BASE_URL = 'https://api.nekrasova.nomoreparties.co';
 
-export const register = async (name, email, password) => {
+export const register = async (data) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, email, password })
+    credentials: 'include',
+    body: JSON.stringify(data)
   })
   .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
 };
