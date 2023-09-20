@@ -1,31 +1,42 @@
 // форма поиска, куда пользователь будет вводить запрос.
 
-import React from "react";
+import React, { useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
+function SearchForm({ searchQuery, onSearch }) {
+  // После сабмита формы поиска производится валидация. 
+  // Если в поле не введён текст, выводится ошибка «Нужно ввести ключевое слово».
+  const [validation, setValidation] = useState('');
 
-  function handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
+    if (searchQuery  === '') {
+      setValidation('Нужно ввести ключевое слово');
+      return;
+    }
+    setValidation('');
+    onSearch();
   }
 
   return (
     <section className="search-form">
-      <div onSubmit={ (evt) => handleSubmit(evt) }className="search-form__container">
-        <form className="search-form__form">
+      <div onSubmit={ handleSubmit } className="search-form__container">
+        <form noValidate className="search-form__form">
           <div className="search-form__wrap">
           <span className="search-form__icon" />
             <input 
-              type="text"
+              type="search"
               placeholder="Фильм"
               className="search-form__input"
+              autoComplete="off"
               required
             />
             <button type="submit" className="search-form__button button">Найти</button>
           </div>
           <FilterCheckbox />
         </form>
+        { validation && (<span className="search-form__validation">Нужно ввести ключевое слово</span>) }
       </div>
     </section>
   );

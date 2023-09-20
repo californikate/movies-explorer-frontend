@@ -76,5 +76,5 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: 'https://api.nekrasova.nomoreparties.co',
+  baseUrl: 'http://localhost:3001',
 });
