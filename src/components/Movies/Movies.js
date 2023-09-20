@@ -14,13 +14,22 @@ function Movies() {
   // Блок результатов появляется только после обработки запроса. 
   // Если пользователь ещё ничего не искал, блока с карточками на странице нет. 
   // Как только запрос сделан, данные передаются в стейт-переменную и блок появляется.
-  
+
   const [moviesList, setMoviesList] = useState([]);
   const [searchQuery, setSearchQuery] = useState(localStorage.getItem('query') || '');
+  const [checkedShorts, setCheckedShorts] = useState(false);
 
   const handleSearch = (evt) => {
     setSearchQuery(evt.target.value);
     localStorage.setItem('query', evt.target.value);
+  }
+
+  const handleCheckShorts = () => {
+    if (checkedShorts === false) {
+      setCheckedShorts(true);
+    } else {
+      setCheckedShorts(false);
+    }
   }
 
   useEffect(() => {
@@ -36,6 +45,8 @@ function Movies() {
         <SearchForm 
           onSearch={ handleSearch }
           searchQuery={ searchQuery }
+          onCheck={ handleCheckShorts }
+          checkedShorts={ checkedShorts }
         />
         <MoviesCardList moviesList={ moviesList }/>
       </main>

@@ -3,10 +3,15 @@
 import React from "react";
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ checkedShorts, onCheck }) {
   return (
     <label className="filter-checkbox">
-      <input className="filter-checkbox__input" type="checkbox" />
+      <input 
+        className="filter-checkbox__input" 
+        type="checkbox" 
+        checked={ checkedShorts }
+        onChange={ onCheck }
+      />
       <span className="filter-checkbox__text">Короткометражки</span>
     </label>
   );

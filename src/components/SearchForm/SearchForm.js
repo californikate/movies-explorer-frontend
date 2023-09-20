@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchQuery, onSearch }) {
+function SearchForm({ searchQuery, onSearch, checkedShorts, onCheck }) {
   // После сабмита формы поиска производится валидация. 
   // Если в поле не введён текст, выводится ошибка «Нужно ввести ключевое слово».
   const [validation, setValidation] = useState('');
@@ -21,8 +21,8 @@ function SearchForm({ searchQuery, onSearch }) {
 
   return (
     <section className="search-form">
-      <div onSubmit={ handleSubmit } className="search-form__container">
-        <form noValidate className="search-form__form">
+      <div className="search-form__container">
+        <form onSubmit={ handleSubmit } className="search-form__form">
           <div className="search-form__wrap">
           <span className="search-form__icon" />
             <input 
@@ -30,11 +30,10 @@ function SearchForm({ searchQuery, onSearch }) {
               placeholder="Фильм"
               className="search-form__input"
               autoComplete="off"
-              required
             />
             <button type="submit" className="search-form__button button">Найти</button>
           </div>
-          <FilterCheckbox />
+          <FilterCheckbox onCheck={ onCheck } checkedShorts={ checkedShorts } />
         </form>
         { validation && (<span className="search-form__validation">Нужно ввести ключевое слово</span>) }
       </div>
