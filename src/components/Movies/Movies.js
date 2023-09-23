@@ -17,6 +17,7 @@ function Movies({ movies, getMovies, savedMovies }) {
   const [checkedShorts, setCheckedShorts] = useState(localStorage.getItem('checkedShorts') === 'true' || false);
   const [isSearched, setIsSearched] = useState(false);
   const [displayedCards, setDisplayedCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const updateQuery = (newQuery) => {
     setQuery(newQuery);
@@ -30,7 +31,9 @@ function Movies({ movies, getMovies, savedMovies }) {
   // При фильтрации по тексту запроса нужно проверять, есть ли введенные слова в названиях фильма 
   // на русском и английском — поля nameRU и nameEN. При этом на поиск не должен влиять регистр символов.
   const handleFilter = (query, checkedShorts) => {
+    setIsLoading(true);
     let filteredMovies = movies;
+
     if (checkedShorts) {
       filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40); //короткометражки до 40мин включительно
     }
@@ -44,10 +47,16 @@ function Movies({ movies, getMovies, savedMovies }) {
 
     setSearchRes(filterRes);
     localStorage.setItem('searchRes', JSON.stringify(filterRes));
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
   }
 
   const handleSearch = async (query, checkedShorts) => {
+    setIsLoading(true);
     let filteredMovies = movies;
+
     if(movies.length === 0) {
       filteredMovies = await getMovies();
     }
@@ -70,8 +79,13 @@ function Movies({ movies, getMovies, savedMovies }) {
       });
     }
     setSearchRes(searchRes);
+    setIsSearched(true);
     localStorage.setItem('searchRes', JSON.stringify(searchRes));
     setDisplayedCards();
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
 
     return;
   };
@@ -95,7 +109,10 @@ function Movies({ movies, getMovies, savedMovies }) {
           onSearch ={ handleSearch }
           onFilter={ handleFilter }
         />
-        { !movies || (isSearched && searchRes.length === 0) ? ( <p>Ничего не найдено</p>
+        { isLoading ? (
+          <Preloader />
+        ) : !movies || (isSearched && searchRes.length === 0) ? ( 
+          <p>Ничего не найдено</p>
         ) : (
           <MoviesCardList 
             moviesList={ searchRes.slice(0, displayedCards) }
