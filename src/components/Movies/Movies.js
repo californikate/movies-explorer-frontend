@@ -16,7 +16,7 @@ function Movies({ movies, getMovies, savedMovies }) {
   const [searchRes, setSearchRes] = useState(JSON.parse(localStorage.getItem('searchRes')) || []);
   const [checkedShorts, setCheckedShorts] = useState(localStorage.getItem('checkedShorts') === 'true' || false);
   const [isSearched, setIsSearched] = useState(false);
-  const [displayedCards, setDisplayedCards] = useState([]);
+  const [displayedCards, setDisplayedCards] = useState(getDisplayedCards());
   const [isLoading, setIsLoading] = useState(false);
 
   const updateQuery = (newQuery) => {
@@ -52,7 +52,10 @@ function Movies({ movies, getMovies, savedMovies }) {
       setIsLoading(false);
     }, 500);
   }
-
+  
+  // поиск фильмов
+  // Если карточки уже были отображены на странице в блоке результатов, то клик по чекбоксу «Короткометражки» 
+  // должен приводить к новой фильтрации всех фильмов с учётом нового состояния чекбокса и введённого текста запроса в форме поиска. 
   const handleSearch = async (query, checkedShorts) => {
     setIsLoading(true);
     let filteredMovies = movies;
@@ -81,13 +84,38 @@ function Movies({ movies, getMovies, savedMovies }) {
     setSearchRes(searchRes);
     setIsSearched(true);
     localStorage.setItem('searchRes', JSON.stringify(searchRes));
-    setDisplayedCards();
+    setDisplayedCards(getDisplayedCards());
 
     setTimeout(() => {
       setIsLoading(false);
     }, 500);
 
     return;
+  };
+  
+  // Ширина 1280px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
+  // Ширина 768px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
+  // Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
+  function getDisplayedCards() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 768) {
+      return 12;
+    } else if (screenWidth <= 768 && screenWidth > 480) {
+      return 8;
+    } else {
+      return 5;
+    }
+  }
+
+  const handleMoreButton = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth > 768) {
+      setDisplayedCards((displayedCards) => displayedCards + 3);
+    } else if (screenWidth <= 768 && screenWidth > 480) {
+      setDisplayedCards((displayedCards) => displayedCards + 2);
+    } else {
+      setDisplayedCards((displayedCards) => displayedCards + 1);
+    }
   };
 
   useEffect(() => {
@@ -122,7 +150,7 @@ function Movies({ movies, getMovies, savedMovies }) {
         )}
         { searchRes === 0 || displayedCards < searchRes.length ? (
           <div className="more__container">
-            <button type="button" className="more__button button">
+            <button onClick={ handleMoreButton } type="button" className="more__button button">
               Ещё
             </button>
           </div>
