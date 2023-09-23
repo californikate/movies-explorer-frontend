@@ -43,6 +43,7 @@ class Api {
       method: 'GET',
       headers: {
         authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
       credentials: 'include',
     }).then(res => this._getResponse(res))
@@ -77,4 +78,5 @@ class Api {
 
 export const api = new Api({
   baseUrl: 'http://localhost:3001',
+  //baseUrl: 'https://api.nekrasova.nomoreparties.co'
 });

@@ -3,14 +3,19 @@
 import React from "react";
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ checkedShorts, onCheck }) {
+function FilterCheckbox({ query, checkedShorts, setCheckedShorts, onFilter }) {
+  const handleCheckShorts = () => {
+    setCheckedShorts(!checkedShorts);
+    onFilter(query, !checkedShorts);
+  }
+
   return (
     <label className="filter-checkbox">
       <input 
         className="filter-checkbox__input" 
         type="checkbox" 
         checked={ checkedShorts }
-        onChange={ onCheck }
+        onChange={ handleCheckShorts }
       />
       <span className="filter-checkbox__text">Короткометражки</span>
     </label>

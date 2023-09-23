@@ -1,0 +1,29 @@
+.more__container {
+  text-align: center;
+}
+
+.more__button {
+  min-width: 320px;
+  border-radius: 6px;
+  background: #F9F9F9;
+  padding: 11px 60px 9px;
+  margin: 50px 0 80px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 768px) {
+  .more__button {
+    margin-top: 40px
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .more__button {
+    min-width: 300px;
+    padding: 11px 20px 9px;
+    margin-top: 50px;
+  }
+}

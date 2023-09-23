@@ -1,41 +1,54 @@
 // форма поиска, куда пользователь будет вводить запрос.
 
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchQuery, onSearch, checkedShorts, onCheck }) {
+function SearchForm({ query, setQuery, checkedShorts, setCheckedShorts, onSearch, onFilter }) {
   // После сабмита формы поиска производится валидация. 
   // Если в поле не введён текст, выводится ошибка «Нужно ввести ключевое слово».
-  const [validation, setValidation] = useState('');
+  const [validation, setValidation] = useState(false);
 
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    if (searchQuery  === '') {
-      setValidation('Нужно ввести ключевое слово');
-      return;
+  const handleInputChange = (e) => {
+    setQuery(e.target.value);
+  }
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (query  === '') {
+      setValidation(true);
+    } else {
+      setValidation(false);
+      onSearch(query, checkedShorts);
     }
-    setValidation('');
-    onSearch();
   }
 
   return (
     <section className="search-form">
       <div className="search-form__container">
-        <form onSubmit={ handleSubmit } className="search-form__form">
+        <form onSubmit={ handleSubmit } noValidate className="search-form__form">
           <div className="search-form__wrap">
           <span className="search-form__icon" />
             <input 
+              id="search"
               type="search"
               placeholder="Фильм"
               className="search-form__input"
-              autoComplete="off"
+              value={ query }
+              onChange={ handleInputChange }
+              required
             />
             <button type="submit" className="search-form__button button">Найти</button>
           </div>
-          <FilterCheckbox onCheck={ onCheck } checkedShorts={ checkedShorts } />
+          <FilterCheckbox 
+            checkedShorts={ checkedShorts } 
+            setCheckedShorts={ setCheckedShorts } 
+            query={ query } 
+            onFilter={ onFilter } 
+          />
         </form>
-        { validation && (<span className="search-form__validation">Нужно ввести ключевое слово</span>) }
+        { validation && (<span className="searchform__validation">Нужно ввести ключевое слово</span>) }
       </div>
     </section>
   );
