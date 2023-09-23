@@ -92,7 +92,7 @@ function Movies({ movies, getMovies, savedMovies }) {
 
     return;
   };
-  
+
   // Ширина 1280px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
   // Ширина 768px — 4 ряда карточек. Кнопка «Ещё» загружает дополнительный ряд карточек.
   // Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
@@ -117,6 +117,18 @@ function Movies({ movies, getMovies, savedMovies }) {
       setDisplayedCards((displayedCards) => displayedCards + 1);
     }
   };
+  
+  // слушатель зависимости между шириной экрана устройства и количеством отображаемых и подгружаемых карточек
+  useEffect(() => {
+    function handleResize() {
+    setDisplayedCards(getDisplayedCards());
+    }
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);  
 
   useEffect(() => {
     localStorage.setItem('query', query);
