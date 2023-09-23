@@ -49,7 +49,7 @@ class Api {
     }).then(res => this._getResponse(res))
   };
 
-  async addNewMovie(data) {
+  async saveMovie(data) {
     const token = localStorage.getItem('token');
 
     return fetch(`${this._url}/movies`, {

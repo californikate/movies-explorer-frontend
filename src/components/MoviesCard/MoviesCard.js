@@ -1,12 +1,11 @@
 // компонент одной карточки фильма
 import React from 'react';
-import './MoviesCard.css';
-
-import savedIcon from '../../images/save-button.svg';
-
 import { Link, useLocation } from "react-router-dom";
 
-function MoviesCard({ movie }) {
+import './MoviesCard.css';
+import savedIcon from '../../images/save-button.svg';
+
+function MoviesCard({ movie, onMovieDelete, onMovieSave }) {
   const { duration, image, nameRU, isSave,trailerLink } = movie;
   const { pathname } = useLocation();
 
@@ -15,12 +14,20 @@ function MoviesCard({ movie }) {
 
   const movieCardButton = 
     pathname === "/saved-movies" ? (
-      <button type="button" className="movies-card__button movies-card__button_type_delete button" />
+      <button onclick={ handleDeleteClick } type="button" className="movies-card__button movies-card__button_type_delete button" />
     ) : isSave ? (
       <img src={ savedIcon } alt="Сохранено" className="movies-card__button" />
     ) : (
-      <button type="button" className="movies-card__button movies-card__button_type_save button">Сохранить</button>
+      <button onClick={ handleSaveClick } type="button" className="movies-card__button movies-card__button_type_save button">Сохранить</button>
     );
+
+  function handleDeleteClick() {
+    onMovieDelete(movie);
+  }
+
+  function handleSaveClick() {
+    onMovieSave(movie);
+  }
 
   return (
     <article className="movies-card">

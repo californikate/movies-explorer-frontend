@@ -4,7 +4,7 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ moviesList, savedMoviesPage, savedMovies, savedMoviesList }) {
+function MoviesCardList({ moviesList, savedMoviesPage, savedMovies, savedMoviesList, onMovieSave }) {
   const searchedMoviesList = savedMoviesPage ? savedMoviesList : moviesList;
 
   return (
@@ -13,8 +13,13 @@ function MoviesCardList({ moviesList, savedMoviesPage, savedMovies, savedMoviesL
         <ul className="movies-cardlist__table list">
           { searchedMoviesList.map((movie) => {
             return (
-              <li key={ movie.id }>
-                <MoviesCard movie={ movie } savedMoviesPage={ savedMoviesPage } savedMovies={ savedMovies }/>
+              <li key={ movie.id ?? movie._id }>
+                <MoviesCard 
+                  movie={ movie } 
+                  savedMoviesPage={ savedMoviesPage } 
+                  savedMovies={ savedMovies }
+                  onMovieSave={ onMovieSave }
+                />
               </li>
             )
           })}

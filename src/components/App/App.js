@@ -46,6 +46,8 @@ function App() {
       .catch((err) => console.log(err))
   }
 
+  const handleMovieSave = (movie) =>{}
+
   // регистрация
   function handleRegister(data) {
     auth.register(data)
@@ -119,6 +121,7 @@ function App() {
                 movies={ allMoviesList }
                 savedMovies={ savedMoviesList }
                 getMovies={ getMovies }
+                onMovieSave={ handleMovieSave }
               />
             }/>
             <Route path="/saved-movies" element={

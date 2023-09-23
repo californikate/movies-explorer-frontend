@@ -7,7 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 
-function Movies({ movies, getMovies, savedMovies }) {
+function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   // Блок результатов появляется только после обработки запроса. 
   // Если пользователь ещё ничего не искал, блока с карточками на странице нет. 
   // Как только запрос сделан, данные передаются в стейт-переменную и блок появляется.
@@ -158,6 +158,7 @@ function Movies({ movies, getMovies, savedMovies }) {
             moviesList={ searchRes.slice(0, displayedCards) }
             savedMovies={ savedMovies }
             savedMoviesPage={ false }
+            onMovieSave={ onMovieSave }
           />
         )}
         { searchRes === 0 || displayedCards < searchRes.length ? (
