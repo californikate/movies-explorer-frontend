@@ -15,6 +15,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Auth from '../Auth/Auth';
+import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
@@ -144,14 +145,12 @@ function App() {
             }/>
             <Route path="/signin" element={
               <Auth 
-                type="signin" 
                 handleAuthorize={ handleAuthorize }
                 authTitle={ "Вход" }
               />} 
             />
             <Route path="/signup" element={
-              <Auth 
-                type="signup" 
+              <Register 
                 handleRegister={ handleRegister }
                 authTitle={ "Регистрация" }
               />} 

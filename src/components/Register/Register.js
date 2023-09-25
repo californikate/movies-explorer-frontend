@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import './Auth.css';
+import './Register.css';
 import Logo from '../Logo/Logo';
 
 import { Link } from 'react-router-dom';
 
 import { EMAIL_REGEX } from '../../utils/const';
+import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleAuthorize }) {
+function Auth({ type, authTitle, handleRegister, errorMessage }) {
   const [formValue, setFormValue] = useState({
+    name: '',
     email: '',
     password: ''
   });
 
-  const { email, password } = formValue;
+  const { name, email, password } = formValue;
   const [formValidation, setFormValidation] = useState(false);
   const [isEmptyForm, setIsEmptyForm] = useState(true);
 
@@ -28,27 +30,41 @@ function Auth({ authTitle, handleAuthorize }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    authTitle === 'Вход' && handleAuthorize(formValue);
-    setFormValue({ email: '', password: ''});
+    authTitle === 'Регистрация' && handleRegister(formValue);
+    setFormValue({name: '', email: '', password: ''});
   }
   // валидация формы
   useEffect(() => {
     const inputValidation = () => {
+      const nameValidation = NAME_REGEX.test(name.trim()) && name.trim().length >=2 && name.trim().length <= 30;
       const emailValidation = EMAIL_REGEX.test(email.trim());
       const passwordValidation = password.trim().length >=6 && password.trim().length <= 30;
 
-      return emailValidation && passwordValidation;
+      return nameValidation && emailValidation && passwordValidation;
     };
 
     setFormValidation(inputValidation());
-    setIsEmptyForm( email.trim() === '' || password.trim() === '');
-  }, [email, password]);
+    setIsEmptyForm(name.trim() === '' || email.trim() === '' || password.trim() === '');
+  }, [name, email, password]);
 
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
       <form onSubmit={ handleSubmit } className="auth__form" action="#">
+        <label for="name" className="auth__form-label">Имя</label>
+        <input 
+          id="name"
+          name="name"
+          type="text"
+          minLength="2"
+          maxLength="30"
+          placeholder="Введите имя"
+          className="auth__form-input"
+          value={ name } 
+          onChange={ handleChange } 
+          required
+        />
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
           id="email"
@@ -73,20 +89,22 @@ function Auth({ authTitle, handleAuthorize }) {
           onChange={ handleChange }
           required
         />
+
+        <span className="auth__form-error">{ errorMessage }</span>
         
         <button 
           disabled={ isEmptyForm || !formValidation } 
           type="submit" 
-          className="auth__button auth__button_type_signin button"
+          className="auth__button button"
         >
-          Войти
+          Зарегистрироваться
         </button>
         <div className="auth__link-wrap">
           <span className="auth__link-span">
-            Еще не зарегистрированы?
+            Уже зарегистрированы?
           </span>
-          <Link to={"/signup"} className="auth__link link">
-            Регистрация
+          <Link to={"/signin"} className="auth__link link">
+            Войти
           </Link>
         </div>
       </form>
