@@ -1,13 +1,8 @@
 // компонент страницы изменения профиля
 import React from 'react';
 import './Profile.css';
-import Header from '../Header/Header';
-
-import { useNavigate } from 'react-router-dom';
 
 function Profile({ logOut }) {
-  const navigate = useNavigate();
-
   return(
       <main className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>

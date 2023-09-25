@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
 import './Auth.css';
 import Logo from '../Logo/Logo';
 
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link } from 'react-router-dom';
 
+import { EMAIL_REGEX } from '../../utils/const';
+import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
+function Auth({ type, authTitle, handleRegister, handleAuthorize, errorMessage }) {
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
     password: ''
-  })
+  });
+
+  const { name, email, password } = formValue;
+  const [formValidation, setFormValidation] = useState(false);
+  const [isEmptyForm, setIsEmptyForm] = useState(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +35,19 @@ function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
 
     setFormValue({name: '', email: '', password: ''});
   }
+  // валидация формы
+  useEffect(() => {
+    const inputValidation = () => {
+      const nameValidation = NAME_REGEX.test(name.trim()) && name.trim().length >=2 && name.trim().length <= 30;
+      const emailValidation = EMAIL_REGEX.test(email.trim());
+      const passwordValidation = password.trim().length >=6 && password.trim().length <= 30;
+
+      return nameValidation && emailValidation && passwordValidation;
+    };
+
+    setFormValidation(inputValidation());
+    setIsEmptyForm(name.trim() === "" || email.trim() === "" || password.trim() === "");
+  }, [name, email, password]);
 
   return (
     <main className="auth">
@@ -47,7 +65,7 @@ function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
               maxLength="30"
               placeholder="Введите имя"
               className="auth__form-input"
-              value={ formValue.name } 
+              value={ name } 
               onChange={ handleChange } 
               required
             />
@@ -60,7 +78,7 @@ function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
           type="email"
           placeholder="Введите email"
           className="auth__form-input"
-          value={ formValue.email } 
+          value={ email } 
           onChange={ handleChange }
           required
         />
@@ -73,16 +91,18 @@ function Auth({ type, authTitle, handleRegister, handleAuthorize }) {
           maxLength="30"
           placeholder="••••••••••••••"
           className="auth__form-input"
-          value={ formValue.password } 
+          value={ password } 
           onChange={ handleChange }
           required
         />
 
-        { type !== "signin" && (
-          <span className="auth__form-error">Что-то пошло не так...</span>
-        )}
+        <span className="auth__form-error">{ errorMessage }</span>
         
-        <button type="submit" className={ type === "signin" ? "auth__button auth__button_type_signin button" : "auth__button button" }>
+        <button 
+          disabled={ isEmptyForm || !formValidation } 
+          type="submit" 
+          className={ type === "signin" ? "auth__button auth__button_type_signin button" : "auth__button button" }
+        >
           { type === "signin" ? "Войти" : "Зарегистрироваться" }
         </button>
         <div className="auth__link-wrap">

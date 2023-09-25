@@ -67,6 +67,12 @@
   line-height: 1.2;
 }
 
+.auth__button:disabled {
+  background-color: #F8F8F8;
+  color: #C2C2C2;
+  cursor: none;
+}
+
 .auth__button_type_signin {
   margin-top: 179px;
 }
