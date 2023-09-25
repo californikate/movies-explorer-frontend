@@ -6,6 +6,7 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import Footer from '../Footer/Footer';
 
 function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   // Блок результатов появляется только после обработки запроса. 
@@ -168,6 +169,7 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
           </div>
         ) : null }
       </main>
+      <Footer />
     </section>
   );
 }

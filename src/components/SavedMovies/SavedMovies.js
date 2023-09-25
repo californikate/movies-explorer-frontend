@@ -6,6 +6,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
+import Footer from '../Footer/Footer';
 
 function SavedMovies({ movies, onMovieDelete }) {
   const [query, setQuery] = useState('');
@@ -86,6 +87,7 @@ function SavedMovies({ movies, onMovieDelete }) {
           />
         )}
       </main>
+      <Footer />
     </section>
   );
 }

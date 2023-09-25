@@ -9,9 +9,6 @@ function Profile({ logOut }) {
   const navigate = useNavigate();
 
   return(
-    <>
-      <Header loggedIn={ true } />
-
       <main className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>
         <form className="profile__form">
@@ -62,7 +59,6 @@ function Profile({ logOut }) {
           </div>
           
       </main>
-    </>
   );
 }
 

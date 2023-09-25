@@ -10,7 +10,6 @@ import * as moviesApi from '../../utils/MoviesApi';
 import './App.css';
 
 import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -158,8 +157,7 @@ function App() {
               />} 
             />
             <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
+          </Routes>          
         </div>
       </div>
     </CurrenUserContext.Provider>
