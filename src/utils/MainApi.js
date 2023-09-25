@@ -18,7 +18,6 @@ class Api {
       headers: {
         authorization: `Bearer ${token}`,
       },
-      credentials: 'include',
     }).then(res => this._getResponse(res))
   };
 
@@ -31,7 +30,6 @@ class Api {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
       body: JSON.stringify(data)
     }).then(res => this._getResponse(res))
   };
@@ -45,11 +43,10 @@ class Api {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
     }).then(res => this._getResponse(res))
   };
 
-  async saveMovie(data) {
+  async saveMovie(movie) {
     const token = localStorage.getItem('token');
 
     return fetch(`${this._url}/movies`, {
@@ -58,8 +55,7 @@ class Api {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
-      body: JSON.stringify(data),
+      body: JSON.stringify(movie)
     }).then(res => this._getResponse(res))
   };
 
@@ -71,12 +67,11 @@ class Api {
       headers: {
         authorization: `Bearer ${token}`,
       },
-      credentials: 'include',
     }).then(res => this._getResponse(res))
   };
 }
 
 export const api = new Api({
-  baseUrl: 'http://localhost:3001',
-  //baseUrl: 'https://api.nekrasova.nomoreparties.co'
+  //baseUrl: 'http://localhost:3001',
+  baseUrl: 'https://api.nekrasova.nomoreparties.co'
 });

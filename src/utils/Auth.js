@@ -7,7 +7,6 @@ export const register = async (data) => {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
-    credentials: 'include',
     body: JSON.stringify(data)
   })
   .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));

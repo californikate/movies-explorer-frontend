@@ -22,7 +22,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') || false)
   const [allMoviesList, setAllMoviesList] = useState([]);
-  const [savedMoviesList, setSavedMoviesList] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ function App() {
   const getSavedMovies = () => {
     api.getSavedMovies()
       .then((movies) => {
-        setSavedMoviesList(movies);
+        setSavedMovies(movies);
       })
       .catch((err) => console.log(err));
   }
@@ -45,8 +45,6 @@ function App() {
       })
       .catch((err) => console.log(err))
   }
-
-  const handleMovieSave = (movie) =>{}
 
   // регистрация
   function handleRegister(data) {
@@ -80,9 +78,13 @@ function App() {
   // выход из аккаунта
   function handleLogout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('query');
+    localStorage.removeItem('checkedShorts');
+    localStorage.removeItem('searchRes');
+
     setLoggedIn(false);
     setCurrentUser({});
-    navigate('/sign-in');
+    navigate('/');
   }
   
   // проверка токена
@@ -93,6 +95,7 @@ function App() {
       auth.getContent(token)
         .then(() => {
           setLoggedIn(true);
+          getSavedMovies();
           navigate('/movies');
         })
         .catch((err) => {
@@ -119,9 +122,8 @@ function App() {
                 element={ Movies }
                 currentUser={ currentUser }
                 movies={ allMoviesList }
-                savedMovies={ savedMoviesList }
+                savedMovies={ savedMovies }
                 getMovies={ getMovies }
-                onMovieSave={ handleMovieSave }
               />
             }/>
             <Route path="/saved-movies" element={
@@ -129,7 +131,7 @@ function App() {
                 loggedIn={ loggedIn }
                 element={ SavedMovies }
                 currentUser={ currentUser }
-                movies={ savedMoviesList }
+                movies={ savedMovies }
                 getSavedMovies={ getSavedMovies }
               />
             }/>
@@ -137,6 +139,8 @@ function App() {
               <ProtectedRoute
                 loggedIn={ loggedIn }
                 element={ Profile }
+                currentUser={ currentUser }
+                logOut={ handleLogout }
               />
             }/>
             <Route path="/signin" element={

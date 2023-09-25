@@ -5,7 +5,7 @@ import Header from '../Header/Header';
 
 import { useNavigate } from 'react-router-dom';
 
-function Profile() {
+function Profile({ logOut }) {
   const navigate = useNavigate();
 
   return(
@@ -50,7 +50,7 @@ function Profile() {
             <button type="button" className="profile__edit-button button">Редактировать</button>
           </li>
           <li>
-            <button type="button" className="profile__exit-button button" onClick={ () => navigate("/") }>Выйти из аккаунта</button>
+            <button type="button" className="profile__exit-button button" onClick={ logOut }>Выйти из аккаунта</button>
           </li>
         </ul>
 

@@ -121,7 +121,7 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   // слушатель зависимости между шириной экрана устройства и количеством отображаемых и подгружаемых карточек
   useEffect(() => {
     function handleResize() {
-    setDisplayedCards(getDisplayedCards());
+      setDisplayedCards(getDisplayedCards());
     }
     
     window.addEventListener('resize', handleResize);
@@ -157,7 +157,6 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
           <MoviesCardList 
             moviesList={ searchRes.slice(0, displayedCards) }
             savedMovies={ savedMovies }
-            savedMoviesPage={ false }
             onMovieSave={ onMovieSave }
           />
         )}

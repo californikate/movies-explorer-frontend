@@ -4,8 +4,22 @@ import React from "react";
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ moviesList, savedMoviesPage, savedMovies, savedMoviesList, onMovieSave }) {
-  const searchedMoviesList = savedMoviesPage ? savedMoviesList : moviesList;
+import { useLocation } from "react-router-dom";
+
+function MoviesCardList({ 
+  moviesList, 
+  savedMovies, 
+  savedMoviesList, 
+  onMovieDelete 
+}) {
+
+  const { pathname } = useLocation();
+  const searchedMoviesList = 
+    pathname === "/saved-movies" ? (
+      savedMoviesList
+    ) : (
+      moviesList
+    );
 
   return (
     <section className="movies-cardlist">
@@ -13,14 +27,13 @@ function MoviesCardList({ moviesList, savedMoviesPage, savedMovies, savedMoviesL
         <ul className="movies-cardlist__table list">
           { searchedMoviesList.map((movie) => {
             return (
-              <li key={ movie.id ?? movie._id }>
-                <MoviesCard 
+                <MoviesCard                  
                   movie={ movie } 
-                  savedMoviesPage={ savedMoviesPage } 
                   savedMovies={ savedMovies }
-                  onMovieSave={ onMovieSave }
+                  key={movie.id ?? movie._id}
+                  //onMovieSave={ onMovieSave }
+                  onMovieDelete={ onMovieDelete }
                 />
-              </li>
             )
           })}
         </ul>  
