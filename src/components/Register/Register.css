@@ -45,6 +45,10 @@
   outline: 1px solid #F3C1F8;
 }
 
+.auth__form-input:invalid {
+  color: #FF4062;
+}
+
 .auth__form-error {
   position: absolute;
   top: 276px;
