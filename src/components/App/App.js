@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import { CurrenUserContext } from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import { api } from '../../utils/MainApi';
 import * as auth from '../../utils/Auth';
@@ -19,12 +19,22 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({ name: '', email: '' });
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') || false)
   const [allMoviesList, setAllMoviesList] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
+
+  const getUserInfo = () => {
+    if (loggedIn) {
+      api.getUserInfo()
+        .then((userInfo) => {
+          setCurrentUser(userInfo);
+        })
+        .catch((err) => console.log(err))
+    }
+  }
 
   // получаем список сохраненных фильмов
   const getSavedMovies = () => {
@@ -34,7 +44,6 @@ function App() {
       })
       .catch((err) => console.log(err));
   }
-    
   
   // получаем список всех фильмов
   const getMovies = () => {
@@ -106,11 +115,15 @@ function App() {
   }
 
   useEffect(() => {
+    getUserInfo();
+  }, [loggedIn]);
+
+  useEffect(() => {
     handleTokenCheck();
   }, []);
 
   return (
-    <CurrenUserContext.Provider value={ currentUser }>
+    <CurrentUserContext.Provider value={ currentUser }>
       <div className="App">
         <div className="page">
           {/* <Header loggedIn={ loggedIn } /> */}
@@ -139,8 +152,8 @@ function App() {
               <ProtectedRoute
                 loggedIn={ loggedIn }
                 element={ Profile }
-                currentUser={ currentUser }
                 logOut={ handleLogout }
+                getUserInfo={ getUserInfo }
               />
             }/>
             <Route path="/signin" element={
@@ -159,7 +172,7 @@ function App() {
           </Routes>          
         </div>
       </div>
-    </CurrenUserContext.Provider>
+    </CurrentUserContext.Provider>
   );
 }
 

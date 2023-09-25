@@ -1,14 +1,19 @@
 // компонент страницы изменения профиля
-import React from 'react';
+import React, { useContext } from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+
 import './Profile.css';
 import Header from '../Header/Header';
 
 function Profile({ logOut }) {
+  const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
+  
   return(
     <>
       <Header loggedIn={ true } />
       <main className="profile">
-        <h1 className="profile__header">Привет, Виталий!</h1>
+        <h1 className="profile__header">Привет, { currentUser.name }!</h1>
         <form className="profile__form">
           <div className="profile__form-wrap">
             <label for="name" className="profile__label">Имя</label>
@@ -19,7 +24,7 @@ function Profile({ logOut }) {
               minLength="2"
               maxLength="30"
               placeholder="Виталий"
-              defaultValue={"Виталий" || ""}
+              value={ currentUser.name }
               className="profile__form-input"
               required
               //disabled
@@ -32,7 +37,7 @@ function Profile({ logOut }) {
               name="email"
               type="email"
               placeholder="pochta@yandex.ru"
-              defaultValue={"pochta@yandex.ru" || ""}
+              value={ currentUser.email }
               className="profile__form-input"
               required
               //disabled
