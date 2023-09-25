@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   // Блок результатов появляется только после обработки запроса. 
@@ -141,6 +142,7 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
 
   return(
     <section className="movies">
+      <Header loggedIn={ true } />
       <main>
         <SearchForm 
           query={ query }

@@ -1,9 +1,12 @@
 // компонент страницы изменения профиля
 import React from 'react';
 import './Profile.css';
+import Header from '../Header/Header';
 
 function Profile({ logOut }) {
   return(
+    <>
+      <Header loggedIn={ true } />
       <main className="profile">
         <h1 className="profile__header">Привет, Виталий!</h1>
         <form className="profile__form">
@@ -54,6 +57,8 @@ function Profile({ logOut }) {
           </div>
           
       </main>
+    </>
+      
   );
 }
 

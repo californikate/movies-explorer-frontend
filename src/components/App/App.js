@@ -9,7 +9,7 @@ import * as moviesApi from '../../utils/MoviesApi';
 
 import './App.css';
 
-import Header from '../Header/Header';
+//import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -113,7 +113,7 @@ function App() {
     <CurrenUserContext.Provider value={ currentUser }>
       <div className="App">
         <div className="page">
-          <Header loggedIn={ loggedIn } />
+          {/* <Header loggedIn={ loggedIn } /> */}
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/movies" element={

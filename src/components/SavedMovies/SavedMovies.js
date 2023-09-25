@@ -7,6 +7,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
 
 function SavedMovies({ movies, onMovieDelete }) {
   const [query, setQuery] = useState('');
@@ -69,6 +70,7 @@ function SavedMovies({ movies, onMovieDelete }) {
 
   return(
     <section className="saved-movies">
+      <Header loggedIn={ true } />
       <main>
         <SearchForm 
           query={ query }
