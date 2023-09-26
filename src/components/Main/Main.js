@@ -10,12 +10,12 @@ import Portfolio from "./Portfolio/Portfolio";
 import Promo from "./Promo/Promo";
 import Techs from "./Techs/Techs";
 import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
+//import Header from "../Header/Header";
 
 function Main() {
   return(
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
         <Promo />
         <NavTab />

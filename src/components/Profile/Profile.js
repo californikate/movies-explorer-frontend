@@ -1,17 +1,16 @@
 // компонент страницы изменения профиля
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import './Profile.css';
-import Header from '../Header/Header';
+//import Header from '../Header/Header';
 
-function Profile({ logOut }) {
+function Profile({ logOut, getUserInfo }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
   
   return(
     <>
-      <Header loggedIn={ true } />
+      {/* <Header loggedIn={ true } /> */}
       <main className="profile">
         <h1 className="profile__header">Привет, { currentUser.name }!</h1>
         <form className="profile__form">
@@ -37,7 +36,6 @@ function Profile({ logOut }) {
               name="email"
               type="email"
               placeholder="pochta@yandex.ru"
-              value={ currentUser.email }
               className="profile__form-input"
               required
               //disabled
@@ -47,19 +45,21 @@ function Profile({ logOut }) {
 
         <ul className="profile__buttons list">
           <li>
-            <button type="button" className="profile__edit-button button">Редактировать</button>
+            <button type="submit" className="profile__edit-button button">Редактировать</button>
           </li>
           <li>
             <button type="button" className="profile__exit-button button" onClick={ logOut }>Выйти из аккаунта</button>
           </li>
         </ul>
 
+            <div className="profile__error">
+              <span className="profile__error-span">При обновлении профиля произошла ошибка.</span>
+              <button type="submit"  className="profile__buttons_type_error button">Сохранить</button>
+            </div>
+
+            <button type="submit"  className="profile__buttons_type_save button">Сохранить</button>
           
-          <button type="submit" className="profile__buttons_type_save button">Сохранить</button>
-          <div className="profile__error">
-            <span className="profile__error-span">При обновлении профиля произошла ошибка.</span>
-            <button type="submit" className="profile__buttons_type_error button">Сохранить</button>
-          </div>
+          
           
       </main>
     </>

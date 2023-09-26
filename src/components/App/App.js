@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -9,7 +9,7 @@ import * as moviesApi from '../../utils/MoviesApi';
 
 import './App.css';
 
-//import Header from '../Header/Header';
+import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -25,6 +25,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
 
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const getUserInfo = () => {
     if (loggedIn) {
@@ -105,7 +106,6 @@ function App() {
         .then(() => {
           setLoggedIn(true);
           getSavedMovies();
-          navigate('/movies');
         })
         .catch((err) => {
           localStorage.removeItem('token');;
@@ -126,6 +126,7 @@ function App() {
     <CurrentUserContext.Provider value={ currentUser }>
       <div className="App">
         <div className="page">
+          { pathname !== ("/signin" || "/signup") && <Header loggedIn={ loggedIn } /> }
           {/* <Header loggedIn={ loggedIn } /> */}
           <Routes>
             <Route path="/" element={<Main />} />
