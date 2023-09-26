@@ -126,8 +126,11 @@ function App() {
     <CurrentUserContext.Provider value={ currentUser }>
       <div className="App">
         <div className="page">
-          { pathname !== ("/signin" || "/signup") && <Header loggedIn={ loggedIn } /> }
-          {/* <Header loggedIn={ loggedIn } /> */}
+          { pathname === "/" && <Header loggedIn={ loggedIn }/> }
+          { pathname === "/movies" && <Header loggedIn={ loggedIn }/>}
+          { pathname === "/saved-movies" && <Header loggedIn={ loggedIn }/>}
+          { pathname === "/profile" && <Header loggedIn={ loggedIn }/>}
+
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/movies" element={

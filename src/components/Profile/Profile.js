@@ -3,14 +3,12 @@ import React, { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import './Profile.css';
-//import Header from '../Header/Header';
 
 function Profile({ logOut, getUserInfo }) {
   const currentUser = useContext(CurrentUserContext);
   
   return(
     <>
-      {/* <Header loggedIn={ true } /> */}
       <main className="profile">
         <h1 className="profile__header">Привет, { currentUser.name }!</h1>
         <form className="profile__form">
