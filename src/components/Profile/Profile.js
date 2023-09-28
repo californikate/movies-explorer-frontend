@@ -13,6 +13,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
   const [email, setEmail] = useState('');
   const [formValidation, setFormValidation] = useState(false);
   const [isEmptyForm, setIsEmptyForm] = useState(true);
+  const [isSameForm, setIsSameForm] = useState(true);
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
@@ -44,14 +45,19 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
   // валидация формы
   useEffect(() => {
     const inputValidation = () => {
-      const nameValidation = NAME_REGEX.test(name.trim()) && name.trim().length >=2 && name.trim().length <= 30;
-      const emailValidation = EMAIL_REGEX.test(email.trim());
+      const nameValidation = 
+        NAME_REGEX.test(name.trim()) 
+        && name.trim().length >=2 
+        && name.trim().length <= 30;
+      const emailValidation = 
+        EMAIL_REGEX.test(email.trim());
 
       return nameValidation && emailValidation;
     };
 
     setFormValidation(inputValidation());
     setIsEmptyForm( name.trim() === '' || email.trim() === '');
+    setIsSameForm(name === currentUser.name && email === currentUser.email);
   }, [name, email]);
 
   return(
@@ -106,7 +112,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
           { isAble && (
             <div className="profile__error">
               <button 
-                disabled={ isEmptyForm || !formValidation } 
+                disabled={ isEmptyForm || !formValidation || isSameForm } 
                 onClick={ handleSubmit } 
                 type="submit" 
                 className="profile__buttons_type_save button"
