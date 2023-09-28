@@ -58,6 +58,10 @@
   border-radius: 3px;
 }
 
+.profile__form-input:invalid {
+  color: #FF4062;
+}
+
 .profile__buttons {
   margin: 202px 0 0;
   padding: 0;
@@ -88,7 +92,7 @@
 
 .profile__buttons_type_save {
   width: 100%;
-  margin: 205px 0 0;
+  margin: 0 auto;
   padding: 13px 0 15px;
 
   font-weight: 500;

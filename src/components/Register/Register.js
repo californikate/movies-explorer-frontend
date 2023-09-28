@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { EMAIL_REGEX } from '../../utils/const';
 import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ type, authTitle, handleRegister, errorMessage }) {
+function Auth({ authTitle, handleRegister, errorMessage }) {
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
