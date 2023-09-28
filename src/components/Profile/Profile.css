@@ -87,7 +87,7 @@
 }
 
 .profile__buttons_type_save {
-  display: none;
+  width: 100%;
   margin: 205px 0 0;
   padding: 13px 0 15px;
 
@@ -101,25 +101,15 @@
 }
 
 .profile__error {
-  display: none;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   margin-top: 172px;
 }
 
-.profile__buttons_type_error {
-  margin: 0;
-  padding: 13px 0 15px;
-  width: 100%;
-
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 1.2;
-
+.profile__buttons_type_save:disabled {
   background-color: #F8F8F8;
   color: #C2C2C2;
-  border-radius: 3px;
 }
 
 .profile__error-span {

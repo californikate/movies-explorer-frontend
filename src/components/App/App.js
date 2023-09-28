@@ -23,6 +23,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') || false)
   const [allMoviesList, setAllMoviesList] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [isAble, setIsAble] = useState(false);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -114,6 +115,16 @@ function App() {
     }
   }
 
+  // редактирование профиля
+  function handleEditProfile({name, email}) {
+    api.setUserInfo({ name, email })
+    .then(({ name, email }) => {
+      setCurrentUser({ name, email });
+      setIsAble(false);
+    })
+    .catch((err) => console.log(err))
+  }
+
   useEffect(() => {
     getUserInfo();
   }, [loggedIn]);
@@ -158,6 +169,10 @@ function App() {
                 element={ Profile }
                 logOut={ handleLogout }
                 getUserInfo={ getUserInfo }
+                currentUser={ currentUser }
+                isAble={ isAble }
+                setIsAble={ setIsAble }
+                onEditProfile={ handleEditProfile }
               />
             }/>
             <Route path="/signin" element={
