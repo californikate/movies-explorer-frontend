@@ -5,6 +5,7 @@ import Logo from '../Logo/Logo';
 import { Link } from 'react-router-dom';
 
 import { EMAIL_REGEX } from '../../utils/const';
+import { useForm } from 'react-hook-form';
 
 function Auth({ authTitle, handleAuthorize }) {
   const [formValue, setFormValue] = useState({
@@ -14,21 +15,18 @@ function Auth({ authTitle, handleAuthorize }) {
 
   const { email, password } = formValue;
   const [formValidation, setFormValidation] = useState(false);
-  const [isEmptyForm, setIsEmptyForm] = useState(true);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors
+    }, 
+  } = useForm();
 
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    authTitle === 'Вход' && handleAuthorize(formValue);
+  const handleSubmitForm = (data) => {
+    console.log('data', data);
+    authTitle === 'Вход' && handleAuthorize(data);
     setFormValue({ email: '', password: ''});
   }
   // валидация формы
@@ -41,14 +39,13 @@ function Auth({ authTitle, handleAuthorize }) {
     };
 
     setFormValidation(inputValidation());
-    setIsEmptyForm( email.trim() === '' || password.trim() === '');
   }, [email, password]);
 
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
-      <form onSubmit={ handleSubmit } className="auth__form" action="#">
+      <form onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
           id="email"
@@ -56,10 +53,16 @@ function Auth({ authTitle, handleAuthorize }) {
           type="email"
           placeholder="Введите email"
           className="auth__form-input"
-          value={ email } 
-          onChange={ handleChange }
-          required
+          //value={ email } 
+          {...register('email', {
+            required: 'Необходимо заполнить',
+            pattern: EMAIL_REGEX
+          })}
         />
+        <span isActive={ errors.email } className="auth__form-error" >
+          { errors.email ? errors.email.message : '' }
+        </span>
+
         <label for="password" className="auth__form-label">Пароль</label>
         <input
           id="password" 
@@ -69,13 +72,21 @@ function Auth({ authTitle, handleAuthorize }) {
           maxLength="30"
           placeholder="••••••••••••••"
           className="auth__form-input"
-          value={ password } 
-          onChange={ handleChange }
-          required
+          //value={ password } 
+          //onChange={ handleChange }
+          {...register('password', {
+            required: 'Необходимо заполнить',          
+            minLength: 6,
+            maxLength: 30
+          })}
         />
+        <span isActive={ errors.password } className="auth__form-error" >
+          { errors.password ? errors.password.message : '' }
+        </span>
         
+
         <button 
-          disabled={ isEmptyForm || !formValidation } 
+          //disabled={ !formValidation } 
           type="submit" 
           className="auth__button auth__button_type_signin button"
         >

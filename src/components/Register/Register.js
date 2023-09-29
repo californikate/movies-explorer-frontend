@@ -65,6 +65,8 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
           onChange={ handleChange } 
           required
         />
+        <span className="auth__form-error">{ errorMessage }</span>
+
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
           id="email"
@@ -89,7 +91,6 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
           onChange={ handleChange }
           required
         />
-
         <span className="auth__form-error">{ errorMessage }</span>
         
         <button 

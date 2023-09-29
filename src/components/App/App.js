@@ -25,6 +25,9 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [isAble, setIsAble] = useState(false);
 
+  const [serverError, setServerError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
@@ -34,7 +37,7 @@ function App() {
         .then((userInfo) => {
           setCurrentUser(userInfo);
         })
-        .catch((err) => console.log(err))
+        .catch((err) => setServerError(err));
     }
   }
 
@@ -44,7 +47,7 @@ function App() {
       .then((movies) => {
         setSavedMovies(movies);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => setServerError(err));
   }
   
   // получаем список всех фильмов
@@ -54,21 +57,18 @@ function App() {
         setAllMoviesList(movies);
         return movies;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => setServerError(err));
   }
 
   // регистрация
   function handleRegister(data) {
     auth.register(data)
       .then((data) => {
-        console.log(data)
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
         navigate('/movies');
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) => setServerError(err));
   }
 
   // авторизация
@@ -81,9 +81,7 @@ function App() {
           navigate('/movies');
         }
       })
-      .catch((err) => {
-        console.log(err);
-      })
+      .catch((err) => setServerError(err));
   }
 
   // выход из аккаунта
@@ -109,8 +107,8 @@ function App() {
           getSavedMovies();
         })
         .catch((err) => {
-          localStorage.removeItem('token');;
-          console.log(err);
+          localStorage.removeItem('token');
+          setServerError(err);
         })
     }
   }
@@ -122,7 +120,9 @@ function App() {
       setCurrentUser({ name, email });
       setIsAble(false);
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      setServerError(err);
+    })
   }
 
   useEffect(() => {
@@ -188,7 +188,7 @@ function App() {
               />} 
             />
             <Route path="*" element={<PageNotFound />} />
-          </Routes>          
+          </Routes>
         </div>
       </div>
     </CurrentUserContext.Provider>
