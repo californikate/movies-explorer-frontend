@@ -26,9 +26,11 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    const isSameForm = nameInput === currentUser.name && emailInput === currentUser.email;
+    //const notSameForm = nameInput !== currentUser.name || emailInput !== currentUser.email;
+    const isSameName = nameInput === currentUser.name;
+		const isSameEmail = emailInput === currentUser.email;
 
-    setFormValidation(!isSameForm);
+    setFormValidation(!(isSameName && isSameEmail));
   }, [nameInput, emailInput, currentUser]);
 
   const handleEditButton = () => {

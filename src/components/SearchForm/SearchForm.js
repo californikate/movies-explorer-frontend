@@ -1,6 +1,6 @@
 // форма поиска, куда пользователь будет вводить запрос.
 
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from './FilterCheckbox/FilterCheckbox';
 

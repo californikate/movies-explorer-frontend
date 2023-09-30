@@ -153,7 +153,9 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
         { isLoading ? (
           <Preloader />
         ) : !movies || (isSearched && searchRes.length === 0) ? ( 
-          <p>Ничего не найдено</p>
+          <div className="movies__wrap">
+            <p className="movies__empty">Ничего не найдено</p>
+          </div>
         ) : (
           <MoviesCardList 
             moviesList={ searchRes.slice(0, displayedCards) }
