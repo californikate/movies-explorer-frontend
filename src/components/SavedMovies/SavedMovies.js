@@ -12,7 +12,7 @@ function SavedMovies({ movies, onMovieDelete }) {
   const [query, setQuery] = useState('');
   const [searchRes, setSearchRes] = useState([]);
   const [checkedShorts, setCheckedShorts] = useState(false);
-
+  const [isSearched, setIsSearched] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,7 +54,7 @@ function SavedMovies({ movies, onMovieDelete }) {
     });
 
     setSearchRes(filteredMovies);
-
+    setIsSearched(true);
 
     setTimeout(() => {
       setIsLoading(false);
@@ -80,6 +80,10 @@ function SavedMovies({ movies, onMovieDelete }) {
         />
         { isLoading ? (
           <Preloader />
+        ) : !movies || (isSearched && searchRes.length === 0) ? ( 
+          <div className="movies__wrap">
+            <p className="movies__empty">Ничего не найдено</p>
+          </div>
         ) : (
           <MoviesCardList 
             savedMoviesList={ searchRes } 
