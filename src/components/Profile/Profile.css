@@ -117,8 +117,17 @@
 }
 
 .profile__error-span {
-  margin: 0;
+  margin-top: 10px;
   color: #FF004C;
+
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.profile__success-span {
+  margin-top: 10px;
+  color: #44944A;
 
   font-weight: 400;
   font-size: 11px;

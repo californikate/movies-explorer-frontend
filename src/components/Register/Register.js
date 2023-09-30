@@ -15,7 +15,7 @@ function Auth({ authTitle, handleRegister, serverError }) {
     formState: {
       errors, isValid
     }, 
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const handleSubmitForm = (data) => {
     authTitle === 'Регистрация' && handleRegister(data);
@@ -50,7 +50,7 @@ function Auth({ authTitle, handleRegister, serverError }) {
           })}
         />
         <span isActive={ errors.name } className="auth__form-error" >
-          { errors.name? errors.name.message : '' }
+          { errors.name ? errors.name.message : '' }
         </span>
 
         <label for="email" className="auth__form-label">E-mail</label>

@@ -1,86 +1,82 @@
 // компонент страницы изменения профиля
 import React, { useContext, useState, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useForm } from 'react-hook-form';
+
 import { NAME_REGEX } from '../../utils/const';
 import { EMAIL_REGEX } from '../../utils/const';
 
 import './Profile.css';
 
-function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
+function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
   const currentUser = useContext(CurrentUserContext);
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: {
+      errors, isValid
+    },
+  } = useForm({ mode: "onChange" });
+
+  const nameInput = watch('name');
+  const emailInput = watch('email');
   const [formValidation, setFormValidation] = useState(false);
-  const [isEmptyForm, setIsEmptyForm] = useState(true);
-  const [isSameForm, setIsSameForm] = useState(true);
+  const [successMessage, setSuccessMessage] = useState('');
 
-  // После загрузки текущего пользователя из API
-  // его данные будут использованы в управляемых компонентах.
   useEffect(() => {
-    setName(currentUser.name);
-    setEmail(currentUser.email);
-  }, [currentUser]);
+    const isSameForm = nameInput === currentUser.name && emailInput === currentUser.email;
 
-  // Обработчики изменения инпута обновляют стейт
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+    setFormValidation(!isSameForm);
+  }, [nameInput, emailInput, currentUser]);
 
   const handleEditButton = () => {
     setIsAble(true);
   };
-  
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
+
+  const handleSubmitForm = ({name, email}) => {
     setIsAble(false);
-    onEditProfile({ name, email });
+    setSuccessMessage('Данные успешно обновлены');
+    onEditProfile({name, email});
   }
-
-  // валидация формы
-  useEffect(() => {
-    const inputValidation = () => {
-      const nameValidation = 
-        NAME_REGEX.test(name.trim()) 
-        && name.trim().length >=2 
-        && name.trim().length <= 30;
-      const emailValidation = 
-        EMAIL_REGEX.test(email.trim());
-
-      return nameValidation && emailValidation;
-    };
-
-    setFormValidation(inputValidation());
-    setIsEmptyForm( name.trim() === '' || email.trim() === '');
-    setIsSameForm(name === currentUser.name && email === currentUser.email);
-  }, [name, email]);
 
   return(
     <>
       <main className="profile">
         <h1 className="profile__header">Привет, { currentUser.name }!</h1>
-        <form onSubmit={ handleSubmit } noValidate className="profile__form">
+        <form onSubmit={ handleSubmit(handleSubmitForm) }  noValidate className="profile__form">
           <div className="profile__form-wrap">
             <label for="name" className="profile__label">Имя</label>
             <input
               id="name"
               name="name"
               type="text"
-              minLength="2"
-              maxLength="30"
               placeholder="Имя"
-              value={ name || '' }
-              onChange={ handleNameChange }
+              defaultValue={ currentUser.name }
               className="profile__form-input"
-              required
               disabled={ !isAble }
+              {...register('name', {
+                required: 'Необходимо заполнить',
+                pattern: {
+                  value: NAME_REGEX,
+                  message: 'Поле имя может содержать только латиницу, кириллицу, пробел или дефис'
+                },
+                minLength: {
+                  value: 2,
+                  message: 'Минимум 2 символа'
+                },
+                maxLength: {
+                  value: 30,
+                  message: 'Максимум 30 символов'
+                }
+              })}
             />
           </div>
+          <span isActive={ errors.name } className="profile__error-span" >
+            { errors.name ? errors.name.message : '' }
+          </span>
+
           <div className="profile__form-wrap">
             <label for="email" className="profile__label">E-mail</label>
             <input
@@ -88,16 +84,25 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
               name="email"
               type="email"
               placeholder="Почта"
-              value={ email || '' }
-              onChange={ handleEmailChange }
+              defaultValue={ currentUser.email }
               className="profile__form-input"
-              required
               disabled={ !isAble }
+              {...register('email', {
+                required: 'Необходимо заполнить',
+                pattern: {
+                  value: EMAIL_REGEX,
+                  message: 'Поле email не соответствует шаблону электронной почты'
+                }
+              })}
             />
           </div>
+          <span isActive={ errors.email } className="profile__error-span" >
+            { errors.email ? errors.email.message : '' }
+          </span>
 
-          {/* <span className="profile__error-span">При обновлении профиля произошла ошибка.</span> */}
-
+          { serverError && <span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>}
+          { successMessage && <span isActive className="profile__success-span">{ successMessage }</span>}
+        
           { !isAble && (
             <ul className="profile__buttons list">
               <li>
@@ -112,8 +117,8 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile }) {
           { isAble && (
             <div className="profile__error">
               <button 
-                disabled={ isEmptyForm || !formValidation || isSameForm } 
-                onClick={ handleSubmit } 
+                disabled={ !formValidation || !isValid } 
+                onClick={ handleSubmit(handleSubmitForm) } 
                 type="submit" 
                 className="profile__buttons_type_save button"
               >

@@ -14,7 +14,7 @@ function Auth({ authTitle, handleAuthorize, serverError }) {
     formState: {
       errors, isValid
     }, 
-  } = useForm();
+  } = useForm({ mode: "onChange" });
 
   const handleSubmitForm = (data) => {
     authTitle === 'Вход' && handleAuthorize(data);

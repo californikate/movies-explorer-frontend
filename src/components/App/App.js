@@ -26,7 +26,6 @@ function App() {
   const [isAble, setIsAble] = useState(false);
 
   const [serverError, setServerError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -173,12 +172,14 @@ function App() {
                 isAble={ isAble }
                 setIsAble={ setIsAble }
                 onEditProfile={ handleEditProfile }
+                serverError={ serverError }
               />
             }/>
             <Route path="/signin" element={
               <Auth 
                 handleAuthorize={ handleAuthorize }
                 authTitle={ "Вход" }
+                serverError={ serverError }
               />} 
             />
             <Route path="/signup" element={
