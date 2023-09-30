@@ -5,7 +5,6 @@ import './SavedMovies.css';
 
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 
 function SavedMovies({ movies, onMovieDelete }) {
@@ -14,10 +13,7 @@ function SavedMovies({ movies, onMovieDelete }) {
   const [checkedShorts, setCheckedShorts] = useState(false);
   const [isSearched, setIsSearched] = useState(false);
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleFilter = (query, checkedShorts) => {
-    setIsLoading(true);
     let filteredMovies = movies;
 
     if (checkedShorts) {
@@ -32,14 +28,9 @@ function SavedMovies({ movies, onMovieDelete }) {
     });
 
     setSearchRes(filterRes);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
   }
 
   const handleSearch = (newQuery, newCheckedShorts) => {
-    setIsLoading(true);
     setCheckedShorts(newCheckedShorts);
 
     const filteredMovies = movies.filter((movie) => {
@@ -55,10 +46,6 @@ function SavedMovies({ movies, onMovieDelete }) {
 
     setSearchRes(filteredMovies);
     setIsSearched(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 300);
 
     return;
   };
@@ -78,9 +65,7 @@ function SavedMovies({ movies, onMovieDelete }) {
           onSearch ={ handleSearch }
           onFilter={ handleFilter }
         />
-        { isLoading ? (
-          <Preloader />
-        ) : !movies || (isSearched && searchRes.length === 0) ? ( 
+        { !movies || (isSearched && searchRes.length === 0) ? ( 
           <div className="movies__wrap">
             <p className="movies__empty">Ничего не найдено</p>
           </div>
