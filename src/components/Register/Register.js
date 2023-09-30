@@ -3,11 +3,12 @@ import './Register.css';
 import Logo from '../Logo/Logo';
 
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
 import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleRegister, errorMessage }) {
+function Auth({ authTitle, handleRegister }) {
   const [formValue, setFormValue] = useState({
     name: '',
     email: '',
@@ -16,21 +17,18 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
 
   const { name, email, password } = formValue;
   const [formValidation, setFormValidation] = useState(false);
-  const [isEmptyForm, setIsEmptyForm] = useState(true);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const {
+    register,
+    handleSubmit,
+    formState: {
+      errors
+    }, 
+  } = useForm();
 
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    authTitle === 'Регистрация' && handleRegister(formValue);
+  const handleSubmitForm = (data) => {
+    console.log('data', data);
+    authTitle === 'Регистрация' && handleRegister(data);
     setFormValue({name: '', email: '', password: ''});
   }
   // валидация формы
@@ -44,14 +42,13 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
     };
 
     setFormValidation(inputValidation());
-    setIsEmptyForm(name.trim() === '' || email.trim() === '' || password.trim() === '');
   }, [name, email, password]);
 
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
-      <form onSubmit={ handleSubmit } className="auth__form" action="#">
+      <form onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
         <label for="name" className="auth__form-label">Имя</label>
         <input 
           id="name"
@@ -61,11 +58,17 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
           maxLength="30"
           placeholder="Введите имя"
           className="auth__form-input"
-          value={ name } 
-          onChange={ handleChange } 
-          required
+          //value={ name } 
+          {...register('name', {
+            required: 'Необходимо заполнить',
+            pattern: NAME_REGEX,
+            minLength: 2,
+            maxLength: 30
+          })}
         />
-        <span className="auth__form-error">{ errorMessage }</span>
+        <span isActive={ errors.name } className="auth__form-error" >
+          { errors.name? errors.name.message : '' }
+        </span>
 
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
@@ -74,10 +77,16 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
           type="email"
           placeholder="Введите email"
           className="auth__form-input"
-          value={ email } 
-          onChange={ handleChange }
-          required
+          //value={ email } 
+          {...register('email', {
+            required: 'Необходимо заполнить',
+            pattern: EMAIL_REGEX
+          })}
         />
+        <span isActive={ errors.email } className="auth__form-error" >
+          { errors.email ? errors.email.message : '' }
+        </span>
+
         <label for="password" className="auth__form-label">Пароль</label>
         <input
           id="password" 
@@ -87,14 +96,19 @@ function Auth({ authTitle, handleRegister, errorMessage }) {
           maxLength="30"
           placeholder="••••••••••••••"
           className="auth__form-input"
-          value={ password } 
-          onChange={ handleChange }
-          required
+          //value={ password } 
+          {...register('password', {
+            required: 'Необходимо заполнить',          
+            minLength: 6,
+            maxLength: 30
+          })}
         />
-        <span className="auth__form-error">{ errorMessage }</span>
+        <span isActive={ errors.password } className="auth__form-error" >
+          { errors.password ? errors.password.message : '' }
+        </span>
         
         <button 
-          disabled={ isEmptyForm || !formValidation } 
+          //disabled={ !formValidation } 
           type="submit" 
           className="auth__button button"
         >

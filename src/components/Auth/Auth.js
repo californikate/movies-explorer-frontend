@@ -3,9 +3,9 @@ import './Auth.css';
 import Logo from '../Logo/Logo';
 
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
-import { useForm } from 'react-hook-form';
 
 function Auth({ authTitle, handleAuthorize }) {
   const [formValue, setFormValue] = useState({
@@ -73,7 +73,6 @@ function Auth({ authTitle, handleAuthorize }) {
           placeholder="••••••••••••••"
           className="auth__form-input"
           //value={ password } 
-          //onChange={ handleChange }
           {...register('password', {
             required: 'Необходимо заполнить',          
             minLength: 6,
