@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Auth.css';
 import Logo from '../Logo/Logo';
 
@@ -7,56 +7,37 @@ import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleAuthorize }) {
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: ''
-  });
-
-  const { email, password } = formValue;
-  const [formValidation, setFormValidation] = useState(false);
-
+function Auth({ authTitle, handleAuthorize, serverError }) {
   const {
     register,
     handleSubmit,
     formState: {
-      errors
+      errors, isValid
     }, 
   } = useForm();
 
   const handleSubmitForm = (data) => {
-    console.log('data', data);
     authTitle === 'Вход' && handleAuthorize(data);
-    setFormValue({ email: '', password: ''});
   }
-  // валидация формы
-  useEffect(() => {
-    const inputValidation = () => {
-      const emailValidation = EMAIL_REGEX.test(email.trim());
-      const passwordValidation = password.trim().length >=6 && password.trim().length <= 30;
-
-      return emailValidation && passwordValidation;
-    };
-
-    setFormValidation(inputValidation());
-  }, [email, password]);
-
+  
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
-      <form onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
+      <form noValidate onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
           id="email"
           name="email"
           type="email"
           placeholder="Введите email"
-          className="auth__form-input"
-          //value={ email } 
+          className={`auth__form-input ${errors.email && "auth__form-input auth__form-input_invalid"}`}
           {...register('email', {
             required: 'Необходимо заполнить',
-            pattern: EMAIL_REGEX
+            pattern: {
+              value: EMAIL_REGEX,
+              message: 'Поле email не соответствует шаблону электронной почты'
+            }
           })}
         />
         <span isActive={ errors.email } className="auth__form-error" >
@@ -68,24 +49,28 @@ function Auth({ authTitle, handleAuthorize }) {
           id="password" 
           name="password" 
           type="password"
-          minLength="6"
-          maxLength="30"
           placeholder="••••••••••••••"
-          className="auth__form-input"
-          //value={ password } 
+          className={`auth__form-input ${errors.password && "auth__form-input auth__form-input_invalid"}`}
           {...register('password', {
             required: 'Необходимо заполнить',          
-            minLength: 6,
-            maxLength: 30
+            minLength: {
+              value: 6,
+              message: 'Минимум 6 символов'
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимум 30 символов'
+            }
           })}
         />
         <span isActive={ errors.password } className="auth__form-error" >
           { errors.password ? errors.password.message : '' }
         </span>
         
+        { serverError && <span isActive className="auth__form-error">Неправильные почта или пароль</span>}
 
         <button 
-          //disabled={ !formValidation } 
+          disabled={ !isValid } 
           type="submit" 
           className="auth__button auth__button_type_signin button"
         >

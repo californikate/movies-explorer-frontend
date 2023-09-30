@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
@@ -8,62 +8,45 @@ import { useForm } from 'react-hook-form';
 import { EMAIL_REGEX } from '../../utils/const';
 import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleRegister }) {
-  const [formValue, setFormValue] = useState({
-    name: '',
-    email: '',
-    password: ''
-  });
-
-  const { name, email, password } = formValue;
-  const [formValidation, setFormValidation] = useState(false);
-
+function Auth({ authTitle, handleRegister, serverError }) {
   const {
     register,
     handleSubmit,
     formState: {
-      errors
+      errors, isValid
     }, 
   } = useForm();
 
   const handleSubmitForm = (data) => {
-    console.log('data', data);
     authTitle === 'Регистрация' && handleRegister(data);
-    setFormValue({name: '', email: '', password: ''});
   }
-  // валидация формы
-  useEffect(() => {
-    const inputValidation = () => {
-      const nameValidation = NAME_REGEX.test(name.trim()) && name.trim().length >=2 && name.trim().length <= 30;
-      const emailValidation = EMAIL_REGEX.test(email.trim());
-      const passwordValidation = password.trim().length >=6 && password.trim().length <= 30;
-
-      return nameValidation && emailValidation && passwordValidation;
-    };
-
-    setFormValidation(inputValidation());
-  }, [name, email, password]);
 
   return (
     <main className="auth">
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
-      <form onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
+      <form noValidate onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
         <label for="name" className="auth__form-label">Имя</label>
         <input 
           id="name"
           name="name"
           type="text"
-          minLength="2"
-          maxLength="30"
           placeholder="Введите имя"
-          className="auth__form-input"
-          //value={ name } 
+          className={`auth__form-input ${errors.name && "auth__form-input auth__form-input_invalid"}`}
           {...register('name', {
             required: 'Необходимо заполнить',
-            pattern: NAME_REGEX,
-            minLength: 2,
-            maxLength: 30
+            pattern: {
+              value: NAME_REGEX,
+              message: 'Поле имя может содержать только латиницу, кириллицу, пробел или дефис'
+            },
+            minLength: {
+              value: 2,
+              message: 'Минимум 2 символа'
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимум 30 символов'
+            }
           })}
         />
         <span isActive={ errors.name } className="auth__form-error" >
@@ -76,11 +59,13 @@ function Auth({ authTitle, handleRegister }) {
           name="email"
           type="email"
           placeholder="Введите email"
-          className="auth__form-input"
-          //value={ email } 
+          className={`auth__form-input ${errors.email && "auth__form-input auth__form-input_invalid"}`}
           {...register('email', {
             required: 'Необходимо заполнить',
-            pattern: EMAIL_REGEX
+            pattern: {
+              value: EMAIL_REGEX,
+              message: 'Поле email не соответствует шаблону электронной почты'
+            }
           })}
         />
         <span isActive={ errors.email } className="auth__form-error" >
@@ -92,23 +77,28 @@ function Auth({ authTitle, handleRegister }) {
           id="password" 
           name="password" 
           type="password"
-          minLength="6"
-          maxLength="30"
           placeholder="••••••••••••••"
-          className="auth__form-input"
-          //value={ password } 
+          className={`auth__form-input ${errors.password && "auth__form-input auth__form-input_invalid"}`}
           {...register('password', {
             required: 'Необходимо заполнить',          
-            minLength: 6,
-            maxLength: 30
+            minLength: {
+              value: 6,
+              message: 'Минимум 6 символов'
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимум 30 символов'
+            }
           })}
         />
         <span isActive={ errors.password } className="auth__form-error" >
           { errors.password ? errors.password.message : '' }
         </span>
+
+        { serverError && <span isActive className="auth__form-error">Что-то пошло не так...</span>}
         
         <button 
-          //disabled={ !formValidation } 
+          disabled={ !isValid } 
           type="submit" 
           className="auth__button button"
         >

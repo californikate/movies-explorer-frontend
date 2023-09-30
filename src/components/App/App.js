@@ -185,6 +185,7 @@ function App() {
               <Register 
                 handleRegister={ handleRegister }
                 authTitle={ "Регистрация" }
+                serverError={ serverError }
               />} 
             />
             <Route path="*" element={<PageNotFound />} />

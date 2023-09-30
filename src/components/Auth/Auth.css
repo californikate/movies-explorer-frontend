@@ -45,7 +45,7 @@
   outline: 1px solid #F3C1F8;
 }
 
-.auth__form-input:invalid {
+.auth__form-input_invalid {
   color: #FF4062;
 }
 
