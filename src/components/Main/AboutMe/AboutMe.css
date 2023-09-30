@@ -61,7 +61,9 @@
 }
 
 .about-me__photo {
+  object-fit: contain;
   max-width: 270px;
+  height: 327px;
   border-radius: 10px;
 }
 
@@ -98,6 +100,7 @@
 
   .about-me__photo {
     max-width: 255px;
+    height: 312px;
   }
 }
 
@@ -125,6 +128,7 @@
   .about-me__photo {
     order: 1;
     min-width: 292px;
+    height: 365px;
   }
 
   .about-me__wrap {
