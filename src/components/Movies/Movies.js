@@ -8,7 +8,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 
-function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
+function Movies({ movies, getMovies, savedMovies, onMovieSave, isLoading }) {
   // Блок результатов появляется только после обработки запроса. 
   // Если пользователь ещё ничего не искал, блока с карточками на странице нет. 
   // Как только запрос сделан, данные передаются в стейт-переменную и блок появляется.
@@ -18,7 +18,6 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   const [checkedShorts, setCheckedShorts] = useState(localStorage.getItem('checkedShorts') === 'true' || false);
   const [isSearched, setIsSearched] = useState(false);
   const [displayedCards, setDisplayedCards] = useState(getDisplayedCards());
-  const [isLoading, setIsLoading] = useState(false);
 
   const updateQuery = (newQuery) => {
     setQuery(newQuery);
@@ -32,7 +31,6 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
   // При фильтрации по тексту запроса нужно проверять, есть ли введенные слова в названиях фильма 
   // на русском и английском — поля nameRU и nameEN. При этом на поиск не должен влиять регистр символов.
   const handleFilter = (query, checkedShorts) => {
-    setIsLoading(true);
     let filteredMovies = movies;
 
     if (checkedShorts) {
@@ -48,17 +46,12 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
 
     setSearchRes(filterRes);
     localStorage.setItem('searchRes', JSON.stringify(filterRes));
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
   }
   
   // поиск фильмов
   // Если карточки уже были отображены на странице в блоке результатов, то клик по чекбоксу «Короткометражки» 
   // должен приводить к новой фильтрации всех фильмов с учётом нового состояния чекбокса и введённого текста запроса в форме поиска. 
   const handleSearch = async (query, checkedShorts) => {
-    setIsLoading(true);
     let filteredMovies = movies;
 
     if(movies.length === 0) {
@@ -86,10 +79,6 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
     setIsSearched(true);
     localStorage.setItem('searchRes', JSON.stringify(searchRes));
     setDisplayedCards(getDisplayedCards());
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
 
     return;
   };
@@ -150,9 +139,8 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave }) {
           onSearch ={ handleSearch }
           onFilter={ handleFilter }
         />
-        { isLoading ? (
-          <Preloader />
-        ) : !movies || (isSearched && searchRes.length === 0) ? ( 
+        { isLoading ? <Preloader /> : '' }
+        { !movies || (isSearched && searchRes.length === 0) ? ( 
           <div className="movies__wrap">
             <p className="movies__empty">Ничего не найдено</p>
           </div>

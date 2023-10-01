@@ -26,6 +26,7 @@ function App() {
   const [isAble, setIsAble] = useState(false);
 
   const [serverError, setServerError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -51,12 +52,14 @@ function App() {
   
   // получаем список всех фильмов
   const getMovies = () => {
+    setIsLoading(true);
     return moviesApi.getMovies()
       .then((movies) => {
         setAllMoviesList(movies);
         return movies;
       })
-      .catch((err) => setServerError(err));
+      .catch((err) => setServerError(err))
+      .finally(() => setIsLoading(false))
   }
 
   // регистрация
@@ -151,6 +154,7 @@ function App() {
                 movies={ allMoviesList }
                 savedMovies={ savedMovies }
                 getMovies={ getMovies }
+                isLoading={ isLoading }
               />
             }/>
             <Route path="/saved-movies" element={
