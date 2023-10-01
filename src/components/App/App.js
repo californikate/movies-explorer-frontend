@@ -63,19 +63,16 @@ function App() {
   }
 
   // регистрация
-  function handleRegister(data) {
+  function handleRegister({ name, email, password }) {
     setIsLoading(true);
-    auth.register(data)
-      .then(() => 
-        auth.authorize({ email: data.email, password: data.password })
-        .then((data) => {
-          localStorage.setItem('token', data.token);
-          setLoggedIn(true);
-          navigate('/movies');
-        })
-        .catch((err) => setServerError(err))
-        .finally(() => setIsLoading(false))
-  )}
+    auth.register({ name, email, password })
+      .then((data) => {
+        console.log(data);
+        handleAuthorize({ email, password });
+      })
+      .catch((err) => setServerError(err))
+      .finally(() => setIsLoading(false))
+  }
 
   // авторизация
   function handleAuthorize({ email, password }) {
