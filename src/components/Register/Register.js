@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { EMAIL_REGEX } from '../../utils/const';
 import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleRegister, serverError }) {
+function Auth({ authTitle, handleRegister, serverError, setServerError }) {
   const {
     register,
     handleSubmit,
@@ -20,6 +20,12 @@ function Auth({ authTitle, handleRegister, serverError }) {
   const handleSubmitForm = (data) => {
     authTitle === 'Регистрация' && handleRegister(data);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setServerError('');
+    }, 1000);
+  }, [serverError]);
 
   return (
     <main className="auth">

@@ -185,6 +185,7 @@ function App() {
                 handleAuthorize={ handleAuthorize }
                 authTitle={ "Вход" }
                 serverError={ serverError }
+                setServerError={ setServerError }
               />} 
             />
             <Route path="/signup" element={
@@ -192,6 +193,7 @@ function App() {
                 handleRegister={ handleRegister }
                 authTitle={ "Регистрация" }
                 serverError={ serverError }
+                setServerError={ setServerError }
               />} 
             />
             <Route path="*" element={<PageNotFound />} />

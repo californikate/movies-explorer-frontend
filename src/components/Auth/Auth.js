@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect} from 'react';
 import './Auth.css';
 import Logo from '../Logo/Logo';
 
@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleAuthorize, serverError }) {
+function Auth({ authTitle, handleAuthorize, serverError, setServerError }) {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,13 @@ function Auth({ authTitle, handleAuthorize, serverError }) {
   const handleSubmitForm = (data) => {
     authTitle === 'Вход' && handleAuthorize(data);
   }
-  
+
+  useEffect(() => {
+    setTimeout(() => {
+      setServerError('');
+    }, 1000);
+  }, [serverError]);
+
   return (
     <main className="auth">
       <Logo />
