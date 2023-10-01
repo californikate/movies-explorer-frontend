@@ -177,6 +177,7 @@ function App() {
                 setIsAble={ setIsAble }
                 onEditProfile={ handleEditProfile }
                 serverError={ serverError }
+                setServerError={ setServerError }
               />
             }/>
             <Route path="/signin" element={

@@ -8,7 +8,7 @@ import { EMAIL_REGEX } from '../../utils/const';
 
 import './Profile.css';
 
-function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
+function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setServerError }) {
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -41,7 +41,19 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
     setIsAble(false);
     setSuccessMessage('Данные успешно обновлены');
     onEditProfile({name, email});
-  }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setServerError('');
+    }, 2000);
+  }, [serverError]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSuccessMessage('');
+    }, 1000);
+  }, [successMessage]);
 
   return(
     <>
@@ -102,8 +114,14 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
             { errors.email ? errors.email.message : '' }
           </span>
 
-          { serverError && <span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>}
-          { successMessage && <span isActive className="profile__success-span">{ successMessage }</span>}
+          {/* { serverError && <span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>}
+          { successMessage && <span isActive className="profile__success-span">{ successMessage }</span>} */}
+
+          {
+            serverError ? (<span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>)
+            : successMessage ? (<span isActive className="profile__success-span">{ successMessage }</span>)
+            : null
+          }
         
           { !isAble && (
             <ul className="profile__buttons list">
@@ -111,7 +129,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError }) {
                 <button onClick={ handleEditButton } type="button" className="profile__edit-button button">Редактировать</button>
               </li>
               <li>
-                <button type="button" className="profile__exit-button button" onClick={ logOut }>Выйти из аккаунта</button>
+                <button onClick={ logOut } type="button" className="profile__exit-button button">Выйти из аккаунта</button>
               </li>
           </ul>
           )}
