@@ -66,14 +66,16 @@ function App() {
   function handleRegister(data) {
     setIsLoading(true);
     auth.register(data)
-      .then((data) => {
-        localStorage.setItem('token', data.token);
-        setLoggedIn(true);
-        navigate('/movies');
-      })
-      .catch((err) => setServerError(err))
-      .finally(() => setIsLoading(false))
-  }
+      .then(() => 
+        auth.authorize({ email: data.email, password: data.password })
+        .then((data) => {
+          localStorage.setItem('token', data.token);
+          setLoggedIn(true);
+          navigate('/movies');
+        })
+        .catch((err) => setServerError(err))
+        .finally(() => setIsLoading(false))
+  )}
 
   // авторизация
   function handleAuthorize({ email, password }) {
@@ -92,13 +94,8 @@ function App() {
 
   // выход из аккаунта
   function handleLogout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('query');
-    localStorage.removeItem('checkedShorts');
-    localStorage.removeItem('searchRes');
-
+    localStorage.clear();
     setLoggedIn(false);
-    setCurrentUser({});
     navigate('/');
   }
   

@@ -117,7 +117,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError, isLoadin
           <span className="auth__link-span">
             Уже зарегистрированы?
           </span>
-          <Link to={"/signin"} disabled={ isLoading } className="auth__link link">
+          <Link to={"/signin"} className="auth__link link">
             Войти
           </Link>
         </div>
