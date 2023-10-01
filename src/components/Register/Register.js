@@ -104,7 +104,13 @@ function Auth({ authTitle, handleRegister, serverError, setServerError, isLoadin
           { errors.password ? errors.password.message : '' }
         </span>
 
-        { serverError && <span isActive className="auth__form-error">Что-то пошло не так...</span>}
+        { 
+          serverError === "Ошибка: 409" ?
+            (<span isActive className="auth__form-error">Пользователь с таким email уже существует</span>)
+          : serverError ?
+            (<span isActive className="auth__form-error">Что-то пошло не так...</span>)
+          : null
+        }
         
         <button 
           disabled={ isLoading|| !isValid } 
