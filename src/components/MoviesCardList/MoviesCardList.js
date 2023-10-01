@@ -1,10 +1,10 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством
 
-import React from "react";
+import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function MoviesCardList({ 
   moviesList, 

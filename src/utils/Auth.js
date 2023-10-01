@@ -1,7 +1,7 @@
-export const BASE_URL = 'https://api.nekrasova.nomoreparties.co';
+import { MAINAPI_BASE_URL } from "./const";
 
 export const register = async (data) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${MAINAPI_BASE_URL}/signup`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -13,7 +13,7 @@ export const register = async (data) => {
 };
 
 export const authorize = async (email, password) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`${MAINAPI_BASE_URL}/signin`, {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -25,7 +25,7 @@ export const authorize = async (email, password) => {
 };
 
 export const getContent = async (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`${MAINAPI_BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
       'Accept': 'application/json',

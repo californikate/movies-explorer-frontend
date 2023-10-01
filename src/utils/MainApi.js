@@ -1,3 +1,5 @@
+import { MAINAPI_BASE_URL } from "./const";
+
 class Api {
   constructor({ baseUrl }) {
     this._url = baseUrl;
@@ -73,5 +75,5 @@ class Api {
 
 export const api = new Api({
   //baseUrl: 'http://localhost:3001',
-  baseUrl: 'https://api.nekrasova.nomoreparties.co'
+  baseUrl: MAINAPI_BASE_URL
 });

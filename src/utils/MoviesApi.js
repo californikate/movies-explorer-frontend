@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.nomoreparties.co/beatfilm-movies";
+import { MOVIES_BASE_URL } from "./const";
 
 const getResponse = (res) => {
   if (res.ok) {
@@ -8,7 +8,7 @@ const getResponse = (res) => {
 };
 
 export const getMovies = async () => {
-  return fetch(BASE_URL)
+  return fetch(MOVIES_BASE_URL)
     .then((res) => getResponse(res))
     .then((movies) => {
       return movies;
