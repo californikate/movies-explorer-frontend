@@ -181,6 +181,7 @@ function App() {
               />
             }/>
             <Route path="/signin" element={
+              loggedIn && pathname === "/signin" ? navigate(-1) :
               <Auth 
                 handleAuthorize={ handleAuthorize }
                 authTitle={ "Вход" }
@@ -189,6 +190,7 @@ function App() {
               />} 
             />
             <Route path="/signup" element={
+              loggedIn && pathname === "/signup" ? navigate(-1) :
               <Register 
                 handleRegister={ handleRegister }
                 authTitle={ "Регистрация" }
