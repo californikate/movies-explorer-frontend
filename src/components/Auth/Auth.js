@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './Auth.css';
 import Logo from '../Logo/Logo';
 
@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleAuthorize, serverError, setServerError }) {
+function Auth({ authTitle, handleAuthorize, serverError, setServerError, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -38,6 +38,7 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError }) {
           type="email"
           placeholder="Введите email"
           className={`auth__form-input ${errors.email && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
           {...register('email', {
             required: 'Необходимо заполнить',
             pattern: {
@@ -57,6 +58,7 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError }) {
           type="password"
           placeholder="••••••••••••••"
           className={`auth__form-input ${errors.password && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
           {...register('password', {
             required: 'Необходимо заполнить',          
             minLength: {
@@ -76,7 +78,7 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError }) {
         { serverError && <span isActive className="auth__form-error">Неправильные почта или пароль</span>}
 
         <button 
-          disabled={ !isValid } 
+          disabled={ isLoading || !isValid } 
           type="submit" 
           className="auth__button auth__button_type_signin button"
         >

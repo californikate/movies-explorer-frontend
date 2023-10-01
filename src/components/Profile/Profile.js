@@ -8,7 +8,7 @@ import { EMAIL_REGEX } from '../../utils/const';
 
 import './Profile.css';
 
-function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setServerError }) {
+function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setServerError, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -69,7 +69,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
               placeholder="Имя"
               defaultValue={ currentUser.name }
               className="profile__form-input"
-              disabled={ !isAble }
+              disabled={ isLoading || !isAble }
               {...register('name', {
                 required: 'Необходимо заполнить',
                 pattern: {
@@ -100,7 +100,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
               placeholder="Почта"
               defaultValue={ currentUser.email }
               className="profile__form-input"
-              disabled={ !isAble }
+              disabled={ isLoading || !isAble }
               {...register('email', {
                 required: 'Необходимо заполнить',
                 pattern: {
@@ -137,7 +137,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
           { isAble && (
             <div className="profile__error">
               <button 
-                disabled={ !formValidation || !isValid } 
+                disabled={ isLoading || !formValidation || !isValid } 
                 onClick={ handleSubmit(handleSubmitForm) } 
                 type="submit" 
                 className="profile__buttons_type_save button"

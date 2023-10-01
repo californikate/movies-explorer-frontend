@@ -64,17 +64,20 @@ function App() {
 
   // регистрация
   function handleRegister(data) {
+    setIsLoading(true);
     auth.register(data)
       .then((data) => {
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
         navigate('/movies');
       })
-      .catch((err) => setServerError(err));
+      .catch((err) => setServerError(err))
+      .finally(() => setIsLoading(false))
   }
 
   // авторизация
   function handleAuthorize({ email, password }) {
+    setIsLoading(true);
     auth.authorize(email, password)
       .then((data) => {
         if (data.token) {
@@ -83,7 +86,8 @@ function App() {
           navigate('/movies');
         }
       })
-      .catch((err) => setServerError(err));
+      .catch((err) => setServerError(err))
+      .finally(() => setIsLoading(false))
   }
 
   // выход из аккаунта
@@ -117,6 +121,7 @@ function App() {
 
   // редактирование профиля
   function handleEditProfile({name, email}) {
+    setIsLoading(true);
     api.setUserInfo({ name, email })
     .then(({ name, email }) => {
       setCurrentUser({ name, email });
@@ -125,6 +130,7 @@ function App() {
     .catch((err) => {
       setServerError(err);
     })
+    .finally(() => setIsLoading(false))
   }
 
   useEffect(() => {
@@ -178,6 +184,7 @@ function App() {
                 onEditProfile={ handleEditProfile }
                 serverError={ serverError }
                 setServerError={ setServerError }
+                isLoading={ isLoading }
               />
             }/>
             <Route path="/signin" element={
@@ -187,6 +194,7 @@ function App() {
                 authTitle={ "Вход" }
                 serverError={ serverError }
                 setServerError={ setServerError }
+                isLoading={ isLoading }
               />} 
             />
             <Route path="/signup" element={
@@ -196,6 +204,7 @@ function App() {
                 authTitle={ "Регистрация" }
                 serverError={ serverError }
                 setServerError={ setServerError }
+                isLoading={ isLoading }
               />} 
             />
             <Route path="*" element={<PageNotFound />} />

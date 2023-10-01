@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form';
 import { EMAIL_REGEX } from '../../utils/const';
 import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleRegister, serverError, setServerError }) {
+function Auth({ authTitle, handleRegister, serverError, setServerError, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -39,6 +39,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError }) {
           type="text"
           placeholder="Введите имя"
           className={`auth__form-input ${errors.name && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
           {...register('name', {
             required: 'Необходимо заполнить',
             pattern: {
@@ -66,6 +67,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError }) {
           type="email"
           placeholder="Введите email"
           className={`auth__form-input ${errors.email && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
           {...register('email', {
             required: 'Необходимо заполнить',
             pattern: {
@@ -85,6 +87,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError }) {
           type="password"
           placeholder="••••••••••••••"
           className={`auth__form-input ${errors.password && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
           {...register('password', {
             required: 'Необходимо заполнить',          
             minLength: {
@@ -104,7 +107,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError }) {
         { serverError && <span isActive className="auth__form-error">Что-то пошло не так...</span>}
         
         <button 
-          disabled={ !isValid } 
+          disabled={ isLoading|| !isValid } 
           type="submit" 
           className="auth__button button"
         >
@@ -114,7 +117,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError }) {
           <span className="auth__link-span">
             Уже зарегистрированы?
           </span>
-          <Link to={"/signin"} className="auth__link link">
+          <Link to={"/signin"} disabled={ isLoading } className="auth__link link">
             Войти
           </Link>
         </div>
