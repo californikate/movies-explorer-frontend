@@ -75,7 +75,7 @@ function MoviesCard({ movie }) {
       { pathname === "/saved-movies" ? (
         <button onClick={ handleDeleteClick } type="button" className="button movies-card__button movies-card__button_type_delete"/>
       ) : isSaved ? (
-        <button onClick={ handleSaveClick } type="button" className="button movies-card__button movies-card__button_type_saved" />
+        <button onClick={ handleDeleteClick } type="button" className="button movies-card__button movies-card__button_type_saved" />
       ) : (
         <button onClick={ handleSaveClick } type="button" className="button movies-card__button movies-card__button_type_save">Сохранить</button>
       )}
