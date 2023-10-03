@@ -46,8 +46,6 @@ function SavedMovies({ movies, onMovieDelete }) {
 
     setSearchRes(filteredMovies);
     setIsSearched(true);
-
-    return;
   };
 
   useEffect(() => {

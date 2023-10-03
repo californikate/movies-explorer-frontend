@@ -23,28 +23,91 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('token') || false)
   const [allMoviesList, setAllMoviesList] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [isSaved, setIsSaved] = useState(false);
   const [isAble, setIsAble] = useState(false);
 
   const [serverError, setServerError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image, 
-    trailerLink,
-    movieId,
-    nameRU,
-    nameEN, 
-    id,  
-  } = movie;
-
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
+  // получаем список сохраненных фильмов
+  const getSavedMovies = () => {
+    api.getSavedMovies()
+      .then((movies) => {
+        setSavedMovies(movies);
+      })
+      .catch((err) => setServerError(err))
+      
+  }
+  
+  // получаем список всех фильмов
+  const getMovies = () => {
+    setIsLoading(true);
+    return moviesApi.getMovies()
+      .then((movies) => {
+        setAllMoviesList(movies);
+        return movies;
+      })
+      .catch((err) => {
+        console.log(err);
+        setServerError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
+      })
+      .finally(() => setIsLoading(false))
+  }
+  
+  // кнопка управления сохранением фильма
+  const handleMovieSave = (movie) => {
+    const isSaved = savedMovies.some((item) => item.movieId === movie.id);
+
+    if (!isSaved) {
+      api.saveMovie(movie)
+        .then((savedMovie) => {
+          setSavedMovies([...savedMovies, savedMovie]);
+        })
+        .catch((err) => setServerError(err));
+    } else {
+      const movieToDelete = savedMovies.find(
+        (item) => item.movieId === movie.id
+      );
+
+      if (movieToDelete && movieToDelete._id) {
+        const movieId = savedMovies.find(
+          (item) => item.movieId === movie.id
+        )._id;
+
+        api.deleteMovie(movieId)
+          .then(() => {
+            setSavedMovies((movies) => 
+              movies.filter((item) => item._id !== movieId)
+            );
+          })
+          .catch((err) => setServerError(err));
+      } else {
+        setServerError(serverError);
+      }
+    }
+  }
+
+  // function handleMovieDelete(movie) {
+  //   api.deleteMovie(movie)
+  //     .then(() => {
+  //       const newArray = savedMovies.filter((item) => item._id !== movieId);
+  //       setSavedMovies(newArray);
+  //     })
+  //     .catch((err) => setServerError(err));
+  // }
+  
+  // кнопка удаления фильма
+  const handleMovieDelete = (movie) => {
+    return api.deleteMovie(movie._id)
+      .then(() => {
+        setSavedMovies((savedMovies) => {
+          savedMovies.filter((item) => item._id !== movie._id)
+        })
+      })
+      .catch((err) => setServerError(err));
+  }
 
   const getUserInfo = () => {
     if (loggedIn) {
@@ -56,29 +119,8 @@ function App() {
     }
   }
 
-  // получаем список сохраненных фильмов
-  const getSavedMovies = () => {
-    api.getSavedMovies()
-      .then((movies) => {
-        setSavedMovies(movies);
-      })
-      .catch((err) => setServerError(err));
-  }
-  
-  // получаем список всех фильмов
-  const getMovies = () => {
-    setIsLoading(true);
-    return moviesApi.getMovies()
-      .then((movies) => {
-        setAllMoviesList(movies);
-        return movies;
-      })
-      .catch((err) => setServerError(err))
-      .finally(() => setIsLoading(false))
-  }
-
   // регистрация
-  function handleRegister({ name, email, password }) {
+  const handleRegister = ({ name, email, password }) => {
     setIsLoading(true);
     auth.register({ name, email, password })
       .then((data) => {
@@ -90,7 +132,7 @@ function App() {
   }
 
   // авторизация
-  function handleAuthorize({ email, password }) {
+  const handleAuthorize = ({ email, password }) => {
     setIsLoading(true);
     auth.authorize(email, password)
       .then((data) => {
@@ -105,14 +147,14 @@ function App() {
   }
 
   // выход из аккаунта
-  function handleLogout() {
+  const handleLogout = () => {
     localStorage.clear();
     setLoggedIn(false);
     navigate('/');
   }
   
   // проверка токена
-  function handleTokenCheck() {
+  const handleTokenCheck = () => {
     const token = localStorage.getItem('token');
 
     if(token) {
@@ -129,7 +171,7 @@ function App() {
   }
 
   // редактирование профиля
-  function handleEditProfile({name, email}) {
+  const handleEditProfile = ({name, email}) => {
     setIsLoading(true);
     api.setUserInfo({ name, email })
     .then(({ name, email }) => {
@@ -142,47 +184,9 @@ function App() {
     .finally(() => setIsLoading(false))
   }
 
-
-  const handleSaveMovie = (movie) => {
-    const isSave = savedMovies.some((item) => item.movieId === movie.id);
-    if (!isSave) {
-      api.saveMovie({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image: `https://api.nomoreparties.co${image.url}`,
-        trailerLink,
-        nameRU,
-        nameEN,
-        thumbnail: `https://api.nomoreparties.co${image.formats.thumbnail.url}`,
-        movieId: id,
-      })
-      .then((savedMovie) => {
-        setSavedMovies([...savedMovies, savedMovie.data]);
-        setIsSaved(true);
-      })
-      .catch((err) => console.log(err))
-    } else {
-      api.deleteMovie(pathname === '/saved-movies' ? movieId : id)
-        .then(() => {
-          setSavedMovies(false);
-        })
-        .catch((err) => console.log(err))
-    }
-  }
-
-  const handleDeleteMovie = () => {
-    api.deleteMovie(movie._id)
-        .then(() => {
-          setIsSaved(false);
-          setSavedMovies((savedMovies) => 
-            savedMovies.filter((item) => item._id !== movie._id)
-          )
-        })
-        .catch((err) => console.log(err))
-  }
+  useEffect(() => {
+    getSavedMovies();
+  }, [loggedIn]);
 
   useEffect(() => {
     getUserInfo();
@@ -212,9 +216,7 @@ function App() {
                 savedMovies={ savedMovies }
                 getMovies={ getMovies }
                 isLoading={ isLoading }
-                onSaveMovie={ handleSaveMovie }
-                onDeleteMovie={ handleDeleteMovie }
-                isSaved={ isSaved }
+                onMovieSave={ handleMovieSave }               
               />
             }/>
             <Route path="/saved-movies" element={
@@ -223,8 +225,8 @@ function App() {
                 element={ SavedMovies }
                 currentUser={ currentUser }
                 movies={ savedMovies }
-                getSavedMovies={ getSavedMovies }
-                onDeleteMovie={ handleDeleteMovie }
+                getSavedMovies={ getSavedMovies } 
+                onMovieDelete={ handleMovieDelete }  
               />
             }/>
             <Route path="/profile" element={

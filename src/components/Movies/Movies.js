@@ -8,7 +8,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 
-function Movies({ movies, getMovies, savedMovies, onMovieSave, isLoading }) {
+function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
   // Блок результатов появляется только после обработки запроса. 
   // Если пользователь ещё ничего не искал, блока с карточками на странице нет. 
   // Как только запрос сделан, данные передаются в стейт-переменную и блок появляется.
@@ -88,9 +88,9 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave, isLoading }) {
   // Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
   function getDisplayedCards() {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 1100) {
+    if (screenWidth > 768) {
       return 12;
-    } else if (screenWidth <= 1100 && screenWidth > 689) {
+    } else if (screenWidth <= 768 && screenWidth > 380) {
       return 8;
     } else {
       return 5;
@@ -99,9 +99,9 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave, isLoading }) {
 
   const handleMoreButton = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 1100) {
+    if (screenWidth > 768) {
       setDisplayedCards((displayedCards) => displayedCards + 3);
-    } else if (screenWidth <= 1100 && screenWidth > 689) {
+    } else if (screenWidth <= 768 && screenWidth > 380) {
       setDisplayedCards((displayedCards) => displayedCards + 2);
     } else {
       setDisplayedCards((displayedCards) => displayedCards + 1);
@@ -149,6 +149,7 @@ function Movies({ movies, getMovies, savedMovies, onMovieSave, isLoading }) {
             moviesList={ searchRes.slice(0, displayedCards) }
             savedMovies={ savedMovies }
             onMovieSave={ onMovieSave }
+            //onMovieDelete={ onMovieDelete }
           />
         )}
         { searchRes === 0 || displayedCards < searchRes.length ? (

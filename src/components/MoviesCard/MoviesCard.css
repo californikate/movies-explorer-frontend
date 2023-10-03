@@ -45,6 +45,10 @@
   height: 21px;
 }
 
+.movies-card__link {
+  color: #000;
+}
+
 .movies-card__info {
   display: flex;
   align-items: flex-end;

@@ -6,7 +6,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 import { useLocation } from 'react-router-dom';
 
-function MoviesCardList({ moviesList, savedMovies, savedMoviesList, onSaveMovie, onDeleteMovie, isSaved }) {
+function MoviesCardList({ onMovieSave, onMovieDelete, moviesList, savedMovies, savedMoviesList }) {
 
   const { pathname } = useLocation();
   const searchedMoviesList = 
@@ -22,14 +22,14 @@ function MoviesCardList({ moviesList, savedMovies, savedMoviesList, onSaveMovie,
         <ul className="movies-cardlist__table list">
           { searchedMoviesList.map((movie) => {
             return (
+              <li key={ movie.id ?? movie._id }>
                 <MoviesCard                  
                   movie={ movie } 
                   savedMovies={ savedMovies }
-                  key={movie.id || movie._id}
-                  onSaveMovie={ onSaveMovie }
-                  onDeleteMovie={ onDeleteMovie }
-                  isSaved={ isSaved }
+                  onMovieSave={ onMovieSave }
+                  onMovieDelete={ onMovieDelete }
                 />
+              </li>
             )
           })}
         </ul>  

@@ -45,7 +45,7 @@ function SearchForm({ query, setQuery, checkedShorts, setCheckedShorts, onSearch
             checkedShorts={ checkedShorts } 
             setCheckedShorts={ setCheckedShorts } 
             query={ query } 
-            onFilter={ onFilter } 
+            onFilter={ onFilter }
           />
         </form>
         { validation && (<span className="searchform__validation">Нужно ввести ключевое слово</span>) }

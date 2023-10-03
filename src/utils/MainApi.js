@@ -57,17 +57,30 @@ class Api {
         authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(movie)
+      body: JSON.stringify({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co/${movie.image.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      })
     }).then(res => this._getResponse(res))
   };
 
-  async deleteMovie(id) {
+  async deleteMovie(movieId) {
     const token = localStorage.getItem('token');
 
-    return fetch(`${this._url}/movies/${id}`, {
+    return fetch(`${this._url}/movies/${movieId}`, {
       method: 'DELETE',
       headers: {
         authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
       },
     }).then(res => this._getResponse(res))
   };
