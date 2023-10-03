@@ -32,7 +32,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, savedMovies }) {
         )
       }
       
-      <Link to={ movie.trailerLink } target="_blank" className="movies-card__link link">
+      <Link to={ movie.trailerLink } target="_blank" className="movies-card__link">
         <img className="movies-card__img" src={ movie.image.url ? `https://api.nomoreparties.co${movie.image.url}` : movie.image} alt={ movie.nameRU } />
         <div className="movies-card__info">
           <h2 className="movies-card__title">{ movie.nameRU }</h2>

@@ -49,10 +49,7 @@ function App() {
         setAllMoviesList(movies);
         return movies;
       })
-      .catch((err) => {
-        console.log(err);
-        setServerError('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз');
-      })
+      .catch((err) => setServerError(err))
       .finally(() => setIsLoading(false))
   }
   
