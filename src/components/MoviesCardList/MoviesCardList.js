@@ -22,14 +22,13 @@ function MoviesCardList({ onMovieSave, onMovieDelete, moviesList, savedMovies, s
         <ul className="movies-cardlist__table list">
           { searchedMoviesList.map((movie) => {
             return (
-              <li key={ movie.id ?? movie._id }>
-                <MoviesCard                  
-                  movie={ movie } 
-                  savedMovies={ savedMovies }
-                  onMovieSave={ onMovieSave }
-                  onMovieDelete={ onMovieDelete }
-                />
-              </li>
+              <MoviesCard
+                key={ movie.id || movie._id }                  
+                movie={ movie } 
+                savedMovies={ savedMovies }
+                onMovieSave={ onMovieSave }
+                onMovieDelete={ onMovieDelete }
+              />
             )
           })}
         </ul>  

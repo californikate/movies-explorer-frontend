@@ -8,18 +8,19 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, savedMovies }) {
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
-  const isSaved = pathname !== '/saved-movies' && savedMovies.some((item) => item.movieId === movie.id);
+  const isSaved = pathname !== '/saved-movies' && savedMovies.some((i) => i.movieId === movie.id);
 
   const handleDeleteClick = () => {
     onMovieDelete(movie);
   }
+
 
   const handleSaveClick = () => {
     onMovieSave(movie);
   }
 
   return (
-    <article className="movies-card">
+    <li key={ movie.id } className="movies-card">
       {
         pathname !== '/saved-movies' ? (
           <button 
@@ -39,7 +40,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, savedMovies }) {
           <span className="movies-card__duration">{ !!hours && `${hours}ч` } {`${minutes}м` }</span>
         </div>
       </Link>
-    </article>
+    </li>
   );
 }
 

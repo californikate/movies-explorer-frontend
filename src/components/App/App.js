@@ -55,7 +55,7 @@ function App() {
   
   // кнопка управления сохранением фильма
   const handleMovieSave = (movie) => {
-    const isSaved = savedMovies.some((item) => item.movieId === movie.id);
+    const isSaved = savedMovies.some((i) => i.movieId === movie.id);
 
     if (!isSaved) {
       api.saveMovie(movie)
@@ -64,20 +64,14 @@ function App() {
         })
         .catch((err) => setServerError(err));
     } else {
-      const movieToDelete = savedMovies.find(
-        (item) => item.movieId === movie.id
-      );
+      const movieToDelete = savedMovies.find((i) => i.movieId === movie.id);
 
       if (movieToDelete && movieToDelete._id) {
-        const movieId = savedMovies.find(
-          (item) => item.movieId === movie.id
-        )._id;
+        const movieId = savedMovies.find((i) => i.movieId === movie.id)._id;
 
         api.deleteMovie(movieId)
           .then(() => {
-            setSavedMovies((movies) => 
-              movies.filter((item) => item._id !== movieId)
-            );
+            setSavedMovies((movies) => movies.filter((i) => i._id !== movieId));
           })
           .catch((err) => setServerError(err));
       } else {
@@ -85,23 +79,12 @@ function App() {
       }
     }
   }
-
-  // function handleMovieDelete(movie) {
-  //   api.deleteMovie(movie)
-  //     .then(() => {
-  //       const newArray = savedMovies.filter((item) => item._id !== movieId);
-  //       setSavedMovies(newArray);
-  //     })
-  //     .catch((err) => setServerError(err));
-  // }
   
   // кнопка удаления фильма
-  const handleMovieDelete = (movie) => {
-    return api.deleteMovie(movie._id)
+  const handleMovieDelete = (movieToDelete) => {
+    api.deleteMovie(movieToDelete._id)
       .then(() => {
-        setSavedMovies((savedMovies) => {
-          savedMovies.filter((item) => item._id !== movie._id)
-        })
+        setSavedMovies(savedMovies.filter((userMovie) => userMovie._id !== movieToDelete._id));
       })
       .catch((err) => setServerError(err));
   }
