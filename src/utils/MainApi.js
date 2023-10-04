@@ -1,8 +1,10 @@
 import { MAINAPI_BASE_URL } from "./const";
+import { IMAGE_BASE_URL } from "./const";
 
 class Api {
-  constructor({ baseUrl }) {
+  constructor({ baseUrl, baseImageUrl }) {
     this._url = baseUrl;
+    this._imageUrl = baseImageUrl;
   };
 
   _getResponse(res) {
@@ -63,9 +65,9 @@ class Api {
         duration: movie.duration,
         year: movie.year,
         description: movie.description,
-        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        image: `${this._imageUrl}/${movie.image.url}`,
         trailerLink: movie.trailerLink,
-        thumbnail: `https://api.nomoreparties.co/${movie.image.url}`,
+        thumbnail: `${this._imageUrl}/${movie.image.url}`,
         movieId: movie.id,
         nameRU: movie.nameRU,
         nameEN: movie.nameEN,
@@ -87,6 +89,6 @@ class Api {
 }
 
 export const api = new Api({
-  //baseUrl: 'http://localhost:3001',
-  baseUrl: MAINAPI_BASE_URL
+  baseUrl: MAINAPI_BASE_URL,
+  baseImageUrl: IMAGE_BASE_URL
 });

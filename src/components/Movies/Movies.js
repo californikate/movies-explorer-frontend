@@ -139,7 +139,9 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
           onSearch ={ handleSearch }
           onFilter={ handleFilter }
         />
+
         { isLoading ? <Preloader /> : '' }
+
         { !movies || (isSearched && searchRes.length === 0) ? ( 
           <div className="movies__wrap">
             <p className="movies__empty">Ничего не найдено</p>
@@ -149,9 +151,9 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
             moviesList={ searchRes.slice(0, displayedCards) }
             savedMovies={ savedMovies }
             onMovieSave={ onMovieSave }
-            //onMovieDelete={ onMovieDelete }
           />
         )}
+
         { searchRes === 0 || displayedCards < searchRes.length ? (
           <div className="more__container">
             <button onClick={ handleMoreButton } type="button" className="more__button button">
@@ -159,6 +161,7 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
             </button>
           </div>
         ) : null }
+
       </main>
       <Footer />
     </section>

@@ -37,6 +37,7 @@ function SavedMovies({ movies, onMovieDelete }) {
       const includesQuery =
         movie.nameRU.toLowerCase().includes(newQuery.toLowerCase()) ||
         movie.nameEN.toLowerCase().includes(newQuery.toLowerCase());
+        
       if (newCheckedShorts) {
         return includesQuery && movie.duration <= 40;
       } else {

@@ -15,7 +15,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError, isLoadin
     formState: {
       errors, isValid
     }, 
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: 'onChange' });
 
   const handleSubmitForm = (data) => {
     authTitle === 'Регистрация' && handleRegister(data);

@@ -18,7 +18,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
     formState: {
       errors, isValid
     },
-  } = useForm({ mode: "onChange" });
+  } = useForm({ mode: 'onChange' });
 
   const nameInput = watch('name');
   const emailInput = watch('email');
@@ -26,7 +26,6 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
   const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
-    //const notSameForm = nameInput !== currentUser.name || emailInput !== currentUser.email;
     const isSameName = nameInput === currentUser.name;
 		const isSameEmail = emailInput === currentUser.email;
 
@@ -113,9 +112,6 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
           <span isActive={ errors.email } className="profile__error-span" >
             { errors.email ? errors.email.message : '' }
           </span>
-
-          {/* { serverError && <span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>}
-          { successMessage && <span isActive className="profile__success-span">{ successMessage }</span>} */}
 
           {
             serverError ? (<span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>)

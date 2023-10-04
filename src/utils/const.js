@@ -3,3 +3,4 @@ export const NAME_REGEX = /^[\p{L}\s-]+$/u; //поле name содержит т�
 
 export const MAINAPI_BASE_URL = 'https://api.nekrasova.nomoreparties.co';
 export const MOVIES_BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const IMAGE_BASE_URL = 'https://api.nomoreparties.co';

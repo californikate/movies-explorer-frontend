@@ -37,13 +37,13 @@ function App() {
       .then((movies) => {
         setSavedMovies(movies);
       })
-      .catch((err) => setServerError(err))
-      
+      .catch((err) => setServerError(err))     
   }
   
   // получаем список всех фильмов
   const getMovies = () => {
     setIsLoading(true);
+
     return moviesApi.getMovies()
       .then((movies) => {
         setAllMoviesList(movies);
@@ -53,7 +53,7 @@ function App() {
       .finally(() => setIsLoading(false))
   }
   
-  // кнопка управления сохранением фильма
+  // кнопка управления фильмом
   const handleMovieSave = (movie) => {
     const isSaved = savedMovies.some((i) => i.movieId === movie.id);
 
@@ -84,11 +84,12 @@ function App() {
   const handleMovieDelete = (movieToDelete) => {
     api.deleteMovie(movieToDelete._id)
       .then(() => {
-        setSavedMovies(savedMovies.filter((userMovie) => userMovie._id !== movieToDelete._id));
+        setSavedMovies(savedMovies.filter((i) => i._id !== movieToDelete._id));
       })
       .catch((err) => setServerError(err));
   }
 
+  // получаем информацию о пользователе
   const getUserInfo = () => {
     if (loggedIn) {
       api.getUserInfo()
@@ -102,6 +103,7 @@ function App() {
   // регистрация
   const handleRegister = ({ name, email, password }) => {
     setIsLoading(true);
+
     auth.register({ name, email, password })
       .then((data) => {
         console.log(data);
@@ -114,6 +116,7 @@ function App() {
   // авторизация
   const handleAuthorize = ({ email, password }) => {
     setIsLoading(true);
+
     auth.authorize(email, password)
       .then((data) => {
         if (data.token) {
@@ -151,17 +154,16 @@ function App() {
   }
 
   // редактирование профиля
-  const handleEditProfile = ({name, email}) => {
+  const handleEditProfile = ({ name, email }) => {
     setIsLoading(true);
+
     api.setUserInfo({ name, email })
-    .then(({ name, email }) => {
-      setCurrentUser({ name, email });
-      setIsAble(false);
-    })
-    .catch((err) => {
-      setServerError(err);
-    })
-    .finally(() => setIsLoading(false))
+      .then(({ name, email }) => {
+        setCurrentUser({ name, email });
+        setIsAble(false);
+      })
+      .catch((err) => setServerError(err))
+      .finally(() => setIsLoading(false))
   }
 
   useEffect(() => {
