@@ -26,6 +26,7 @@ function App() {
   const [isAble, setIsAble] = useState(false);
 
   const [serverError, setServerError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -161,8 +162,17 @@ function App() {
       .then(({ name, email }) => {
         setCurrentUser({ name, email });
         setIsAble(false);
+        setSuccessMessage('Данные успешно обновлены');
       })
-      .catch((err) => setServerError(err))
+      .catch((err) => {
+        if (err === 'Ошибка: 409') {
+          setServerError("Пользователь с таким email уже существует");
+        } else {
+          setServerError("При обновлении профиля произошла ошибка");
+        }
+        setSuccessMessage('');
+        setIsAble(true);
+      })
       .finally(() => setIsLoading(false))
   }
 
@@ -224,6 +234,8 @@ function App() {
                 serverError={ serverError }
                 setServerError={ setServerError }
                 isLoading={ isLoading }
+                successMessage={ successMessage }
+                setSuccessMessage={ setSuccessMessage }
               />
             }/>
             <Route path="/signin" element={

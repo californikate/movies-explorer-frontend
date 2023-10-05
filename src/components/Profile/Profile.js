@@ -8,7 +8,7 @@ import { EMAIL_REGEX } from '../../utils/const';
 
 import './Profile.css';
 
-function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setServerError, isLoading }) {
+function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setServerError, isLoading, successMessage, setSuccessMessage }) {
   const currentUser = useContext(CurrentUserContext);
 
   const {
@@ -23,7 +23,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
   const nameInput = watch('name');
   const emailInput = watch('email');
   const [formValidation, setFormValidation] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
+  
 
   useEffect(() => {
     const isSameName = nameInput === currentUser.name;
@@ -38,20 +38,23 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
 
   const handleSubmitForm = ({name, email}) => {
     setIsAble(false);
-    setSuccessMessage('Данные успешно обновлены');
     onEditProfile({name, email});
   };
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setServerError('');
+  //   }, 2000);
+  // }, [serverError]);
+
   useEffect(() => {
-    setTimeout(() => {
-      setServerError('');
-    }, 2000);
-  }, [serverError]);
+    setServerError('');
+  }, [emailInput]);
 
   useEffect(() => {
     setTimeout(() => {
       setSuccessMessage('');
-    }, 1000);
+    }, 2000);
   }, [successMessage]);
 
   return(
@@ -114,7 +117,7 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
           </span>
 
           {
-            serverError ? (<span isActive className="profile__error-span">При обновлении профиля произошла ошибка</span>)
+            serverError ? (<span isActive className="profile__error-span">{ serverError }</span>)
             : successMessage ? (<span isActive className="profile__success-span">{ successMessage }</span>)
             : null
           }
