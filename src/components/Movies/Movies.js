@@ -130,6 +130,14 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
     localStorage.setItem('checkedShorts', checkedShorts);
   }, [checkedShorts]);
 
+  // useEffect(() => {
+  //   handleFilter(query, checkedShorts);
+  // }, [movies, query, checkedShorts]);
+
+  useEffect(() => {
+    handleSearch(query, checkedShorts);
+  }, [checkedShorts]);
+
   return(
     <section className="movies">
       <main>

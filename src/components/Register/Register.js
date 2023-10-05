@@ -113,7 +113,7 @@ function Auth({ authTitle, handleRegister, serverError, setServerError, isLoadin
         }
         
         <button 
-          disabled={ isLoading|| !isValid } 
+          disabled={ isLoading || !isValid } 
           type="submit" 
           className="auth__button button"
         >
