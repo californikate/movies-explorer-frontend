@@ -3,12 +3,10 @@ import { Link, useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 
 import { IMAGE_BASE_URL } from '../../utils/const';
+import transformMovieDuration from '../../utils/utils';
 
 function MoviesCard({ movie, onMovieSave, onMovieDelete, savedMovies }) {
   const { pathname } = useLocation();
-
-  const hours = Math.floor(movie.duration / 60);
-  const minutes = movie.duration % 60;
 
   const isSaved = pathname !== '/saved-movies' && savedMovies.some((i) => i.movieId === movie.id);
 
@@ -43,7 +41,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, savedMovies }) {
         />
         <div className="movies-card__info">
           <h2 className="movies-card__title">{ movie.nameRU }</h2>
-          <span className="movies-card__duration">{ !!hours && `${hours}ч` } {`${minutes}м` }</span>
+          <span className="movies-card__duration">{ transformMovieDuration(movie.duration) }</span>
         </div>
       </Link>
     </li>
