@@ -5,4 +5,4 @@ https://www.figma.com/file/6FMWkB94wE7KTkcCgUXtnC/light-1?type=design&node-id=1-
 
 * Бэкенд: https://api.nekrasova.nomoreparties.co
 
-* Ссылка на пул реквест:
+* Ссылка на пул реквест: https://github.com/californikate/movies-explorer-frontend/pull/2
