@@ -3,6 +3,12 @@
   overflow: hidden;
   width: 100%;
   font-size: 0;
+
+  transition: transform 0.2s;
+}
+
+.movies-card:hover {
+  transform: scale(102%);
 }
 
 .movies-card__img {
@@ -21,15 +27,15 @@
   top: 14px;
   right: 14px;
 
-  transition: opacity .2s, visibility .2s, transform .2s;
+  /* transition: opacity .2s, visibility .2s, transform .2s;
   opacity: 0;
-  visibility: hidden;
+  visibility: hidden; */
 }
 
-.movies-card:hover .movies-card__button {
+/* .movies-card:hover .movies-card__button {
   opacity: 1;
   visibility: visible;
-}
+} */
 
 .movies-card__button_type_save {
   min-width: 72px;
@@ -105,8 +111,8 @@
     top: 14px;
     right: 14px;
   
-    opacity: 1;
-    visibility: visible;
+    /* opacity: 1;
+    visibility: visible; */
   }
 }
 
