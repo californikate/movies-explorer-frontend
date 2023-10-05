@@ -8,6 +8,8 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 
+import { SHORTS_LENGTH, SCREEN_WIDTH, DISPLAYED_CARDS, CARDS_NUMBER } from '../../utils/const';
+
 function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
   // Блок результатов появляется только после обработки запроса. 
   // Если пользователь ещё ничего не искал, блока с карточками на странице нет. 
@@ -34,7 +36,7 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
     let filteredMovies = movies;
 
     if (checkedShorts) {
-      filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40); //короткометражки до 40мин включительно
+      filteredMovies = filteredMovies.filter((movie) => movie.duration <= SHORTS_LENGTH); //короткометражки до 40мин включительно
     }
 
     const filterRes = filteredMovies.filter((movie) => {
@@ -60,7 +62,7 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
 
     let searchRes;
     if (checkedShorts) {
-      filteredMovies = movies.filter((movie) => movie.duration <= 40); //короткометражки до 40мин включительно
+      filteredMovies = movies.filter((movie) => movie.duration <= SHORTS_LENGTH); //короткометражки до 40мин включительно
       searchRes = filteredMovies.filter((movie) => {
         const movieName = movie.nameRU || movie.nameEN;
         return (
@@ -88,23 +90,23 @@ function Movies({ movies, getMovies, savedMovies, isLoading, onMovieSave }) {
   // Ширина от 320px до 480px — 5 карточек по 1 в ряд. Кнопка «Ещё» загружает по 2 карточки.
   function getDisplayedCards() {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 768) {
-      return 12;
-    } else if (screenWidth <= 768 && screenWidth > 380) {
-      return 8;
+    if (screenWidth > SCREEN_WIDTH.TABLET) {
+      return DISPLAYED_CARDS.DESKTOP;
+    } else if (screenWidth <= SCREEN_WIDTH.TABLET && screenWidth > SCREEN_WIDTH.MOBILE) {
+      return DISPLAYED_CARDS.TABLET;
     } else {
-      return 5;
+      return DISPLAYED_CARDS.MOBILE;
     }
   }
 
   const handleMoreButton = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 768) {
-      setDisplayedCards((displayedCards) => displayedCards + 3);
-    } else if (screenWidth <= 768 && screenWidth > 380) {
-      setDisplayedCards((displayedCards) => displayedCards + 2);
+    if (screenWidth > SCREEN_WIDTH.TABLET) {
+      setDisplayedCards((displayedCards) => displayedCards + CARDS_NUMBER.DESKTOP);
+    } else if (screenWidth <= SCREEN_WIDTH.TABLET && screenWidth > SCREEN_WIDTH.MOBILE) {
+      setDisplayedCards((displayedCards) => displayedCards + CARDS_NUMBER.TABLET);
     } else {
-      setDisplayedCards((displayedCards) => displayedCards + 1);
+      setDisplayedCards((displayedCards) => displayedCards + CARDS_NUMBER.MOBILE);
     }
   };
   

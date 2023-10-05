@@ -7,6 +7,8 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Footer from '../Footer/Footer';
 
+import { SHORTS_LENGTH } from '../../utils/const';
+
 function SavedMovies({ movies, onMovieDelete }) {
   const [query, setQuery] = useState('');
   const [searchRes, setSearchRes] = useState([]);
@@ -17,7 +19,7 @@ function SavedMovies({ movies, onMovieDelete }) {
     let filteredMovies = movies;
 
     if (checkedShorts) {
-      filteredMovies = filteredMovies.filter((movie) => movie.duration <= 40); //короткометражки до 40мин включительно
+      filteredMovies = filteredMovies.filter((movie) => movie.duration <= SHORTS_LENGTH); //короткометражки до 40мин включительно
     }
 
     const filterRes = filteredMovies.filter((movie) => {
@@ -39,7 +41,7 @@ function SavedMovies({ movies, onMovieDelete }) {
         movie.nameEN.toLowerCase().includes(newQuery.toLowerCase());
         
       if (newCheckedShorts) {
-        return includesQuery && movie.duration <= 40;
+        return includesQuery && movie.duration <= SHORTS_LENGTH;
       } else {
         return includesQuery;
       }

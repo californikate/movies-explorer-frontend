@@ -1,5 +1,4 @@
-import { MAINAPI_BASE_URL } from "./const";
-import { IMAGE_BASE_URL } from "./const";
+import { MAINAPI_BASE_URL, IMAGE_BASE_URL } from "./const";
 
 class Api {
   constructor({ baseUrl, baseImageUrl }) {
