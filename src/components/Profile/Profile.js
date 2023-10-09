@@ -1,5 +1,5 @@
 // компонент страницы изменения профиля
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useForm } from 'react-hook-form';
 
@@ -16,36 +16,21 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
     handleSubmit,
     watch,
     formState: {
-      errors, isValid
+      errors, isValid,
     },
   } = useForm({ mode: 'onChange' });
 
   const nameInput = watch('name');
   const emailInput = watch('email');
-  const [formValidation, setFormValidation] = useState(false);
-  
-
-  useEffect(() => {
-    const isSameName = nameInput === currentUser.name;
-		const isSameEmail = emailInput === currentUser.email;
-
-    setFormValidation(!(isSameName && isSameEmail));
-  }, [nameInput, emailInput, currentUser]);
 
   const handleEditButton = () => {
     setIsAble(true);
   };
 
-  const handleSubmitForm = ({name, email}) => {
+  const handleSubmitForm = ({ name, email }) => {
     setIsAble(false);
-    onEditProfile({name, email});
+    onEditProfile({ name, email });
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setServerError('');
-  //   }, 2000);
-  // }, [serverError]);
 
   useEffect(() => {
     setServerError('');
@@ -73,7 +58,10 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
               className="profile__form-input"
               disabled={ isLoading || !isAble }
               {...register('name', {
-                required: 'Необходимо заполнить',
+                required: {
+                  value: true,
+                  message: 'Необходимо заполнить'
+                },
                 pattern: {
                   value: NAME_REGEX,
                   message: 'Поле имя может содержать только латиницу, кириллицу, пробел или дефис'
@@ -104,7 +92,10 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
               className="profile__form-input"
               disabled={ isLoading || !isAble }
               {...register('email', {
-                required: 'Необходимо заполнить',
+                required: {
+                  value: true,
+                  message: 'Необходимо заполнить'
+                },
                 pattern: {
                   value: EMAIL_REGEX,
                   message: 'Поле email не соответствует шаблону электронной почты'
@@ -136,7 +127,11 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
           { isAble && (
             <div className="profile__error">
               <button 
-                disabled={ isLoading || !formValidation || !isValid } 
+                disabled={ 
+                  isLoading || 
+                  !isValid || 
+                  (nameInput === currentUser.name && emailInput === currentUser.email)
+                } 
                 onClick={ handleSubmit(handleSubmitForm) } 
                 type="submit" 
                 className="profile__buttons_type_save button"
