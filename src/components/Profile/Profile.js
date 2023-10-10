@@ -15,21 +15,26 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
     register,
     handleSubmit,
     watch,
+    setValue,
+    reset,
     formState: {
-      errors, isValid,
+      errors, isValid, isDirty
     },
   } = useForm({ mode: 'onChange' });
 
-  const nameInput = watch('name');
+  //const nameInput = watch('name');
   const emailInput = watch('email');
 
   const handleEditButton = () => {
     setIsAble(true);
+    setValue('name', currentUser.name, { shouldDirty: true });
+    setValue('email', currentUser.email, { shouldDirty: true });
   };
 
   const handleSubmitForm = ({ name, email }) => {
     setIsAble(false);
     onEditProfile({ name, email });
+    reset();
   };
 
   useEffect(() => {
@@ -129,8 +134,9 @@ function Profile({ logOut, isAble, setIsAble, onEditProfile, serverError, setSer
               <button 
                 disabled={ 
                   isLoading || 
-                  !isValid || 
-                  (nameInput === currentUser.name && emailInput === currentUser.email)
+                  !isValid ||
+                  !isDirty
+                  //(nameInput === currentUser.name && emailInput === currentUser.email)
                 } 
                 onClick={ handleSubmit(handleSubmitForm) } 
                 type="submit" 
