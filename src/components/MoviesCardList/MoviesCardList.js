@@ -1,34 +1,37 @@
 // компонент, который управляет отрисовкой карточек фильмов на страницу и их количеством
 
-import React from "react";
+import React from 'react';
 import './MoviesCardList.css';
+import MoviesCard from '../MoviesCard/MoviesCard';
 
-import { useLocation } from "react-router-dom";
-import Movies from "../../utils/const";
-import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from "../Preloader/Preloader";
-import MoreButton from "./MoreButton/MoreButton";
+import { useLocation } from 'react-router-dom';
 
-function MoviesCardList() {
+function MoviesCardList({ onMovieSave, onMovieDelete, moviesList, savedMovies, savedMoviesList }) {
+
   const { pathname } = useLocation();
+  const searchedMoviesList = 
+    pathname === "/saved-movies" ? (
+      savedMoviesList
+    ) : (
+      moviesList
+    );
 
   return (
     <section className="movies-cardlist">
       <div className="movies-cardlist__container">
         <ul className="movies-cardlist__table list">
-          {Movies.map((card) => {
+          { searchedMoviesList.map((movie) => {
             return (
-              <li key={ card.movieId }>
-                <MoviesCard movie={ card } />
-              </li>
+              <MoviesCard
+                key={ movie.id || movie._id }                  
+                movie={ movie } 
+                savedMovies={ savedMovies }
+                onMovieSave={ onMovieSave }
+                onMovieDelete={ onMovieDelete }
+              />
             )
           })}
-        </ul>
-        
-        <div className="movies-cardlist__loading">
-          { pathname === "/movies" ? <MoreButton /> : null }
-          { false ? <Preloader /> : null }
-        </div>
+        </ul>  
       </div>
     </section>
   );

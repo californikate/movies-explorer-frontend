@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import './Auth.css';
+import './Register.css';
 import Logo from '../Logo/Logo';
 
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
 import { EMAIL_REGEX } from '../../utils/const';
+import { NAME_REGEX } from '../../utils/const';
 
-function Auth({ authTitle, handleAuthorize, serverError, setServerError, isLoading }) {
+function Auth({ authTitle, handleRegister, serverError, setServerError, isLoading }) {
   const {
     register,
     handleSubmit,
@@ -17,7 +18,7 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError, isLoadi
   } = useForm({ mode: 'onChange' });
 
   const handleSubmitForm = (data) => {
-    authTitle === 'Вход' && handleAuthorize(data);
+    authTitle === 'Регистрация' && handleRegister(data);
   }
 
   useEffect(() => {
@@ -31,6 +32,34 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError, isLoadi
       <Logo />
       <h1 className="auth__title">{ authTitle }</h1>
       <form noValidate onSubmit={ handleSubmit(handleSubmitForm) } className="auth__form" action="#">
+        <label for="name" className="auth__form-label">Имя</label>
+        <input 
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Введите имя"
+          className={`auth__form-input ${errors.name && "auth__form-input auth__form-input_invalid"}`}
+          disabled={ isLoading }
+          {...register('name', {
+            required: 'Необходимо заполнить',
+            pattern: {
+              value: NAME_REGEX,
+              message: 'Поле имя может содержать только латиницу, кириллицу, пробел или дефис'
+            },
+            minLength: {
+              value: 2,
+              message: 'Минимум 2 символа'
+            },
+            maxLength: {
+              value: 30,
+              message: 'Максимум 30 символов'
+            }
+          })}
+        />
+        <span isActive={ errors.name } className="auth__form-error" >
+          { errors.name ? errors.name.message : '' }
+        </span>
+
         <label for="email" className="auth__form-label">E-mail</label>
         <input 
           id="email"
@@ -74,22 +103,28 @@ function Auth({ authTitle, handleAuthorize, serverError, setServerError, isLoadi
         <span isActive={ errors.password } className="auth__form-error" >
           { errors.password ? errors.password.message : '' }
         </span>
-        
-        { serverError && <span isActive className="auth__form-error">Неправильные почта или пароль</span>}
 
+        { 
+          serverError === "Ошибка: 409" ?
+            (<span isActive className="auth__form-error">Пользователь с таким email уже существует</span>)
+          : serverError ?
+            (<span isActive className="auth__form-error">Что-то пошло не так...</span>)
+          : null
+        }
+        
         <button 
           disabled={ isLoading || !isValid } 
           type="submit" 
-          className="auth__button auth__button_type_signin button"
+          className="auth__button button"
         >
-          Войти
+          Зарегистрироваться
         </button>
         <div className="auth__link-wrap">
           <span className="auth__link-span">
-            Еще не зарегистрированы?
+            Уже зарегистрированы?
           </span>
-          <Link to={"/signup"} className="auth__link link">
-            Регистрация
+          <Link to={"/signin"} className="auth__link link">
+            Войти
           </Link>
         </div>
       </form>

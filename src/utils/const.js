@@ -1,41 +1,26 @@
-import image from '../images/pic__COLOR_pic.png';
+export const EMAIL_REGEX = /^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/g; //проверка валидности email
+export const NAME_REGEX = /^[\p{L}\s-]+$/u; //поле name содержит только латиницу, кириллицу, пробел или дефис
 
-const Movies = [
-  {
-    duration: 77,
-    link: undefined,
-    movieId: 1,
-    name: '33 слова о дизайне',
-    isSave: false,
-  },
-  {
-    duration: 77,
-    link: image,
-    movieId: 2,
-    name: 'Киноальманах «100 лет дизайна»Киноальманах «100 лет дизайна»',
-    isSave: true,
-  },
-  {
-    duration: 77,
-    link: image,
-    movieId: 3,
-    name: 'Киноальманах «100 лет дизайна»',
-    isSave: false,
-  },
-  {
-    duration: 89,
-    link: image,
-    movieId: 4,
-    name: '33 слова о дизайне',
-    isSave: false,
-  },
-  {
-    duration: 95,
-    link: image,
-    movieId: 5,
-    name: 'Киноальманах «100 лет дизайна»',
-    isSave: true,
-  },
-];
+export const MAINAPI_BASE_URL = 'https://api.nekrasova.nomoreparties.co';
+export const MOVIES_BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+export const IMAGE_BASE_URL = 'https://api.nomoreparties.co';
 
-export default Movies;
+export const SHORTS_LENGTH = 40;
+
+export const SCREEN_WIDTH = {
+  DESKTOP: 1280,
+  TABLET: 768,
+  MOBILE: 380,
+}
+
+export const DISPLAYED_CARDS = {
+  DESKTOP: 12,
+  TABLET: 8,
+  MOBILE: 5,
+}
+
+export const CARDS_NUMBER = {
+  DESKTOP: 3,
+  TABLET: 2,
+  MOBILE: 1,
+}

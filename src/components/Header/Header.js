@@ -1,10 +1,6 @@
 // компонент, который отрисовывает шапку сайта на страницу. 
-// Шапка на главной странице, как и на других страницах, должна менять отображение, 
-// если пользователь авторизован или не авторизован. 
-// Такое поведение нужно сразу предусмотреть в вёрстке, даже несмотря на то, 
-// что сама авторизация ещё не реализована.
 
-import React from "react";
+import React from 'react';
 import './Header.css';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from '../Logo/Logo';
@@ -17,7 +13,7 @@ function Header({ loggedIn }) {
     <header className={ pathname === "/" ? "header" : "header header_theme_bw" }>
       <div className="header__container">
         <Logo />
-        
+
         { loggedIn ? (
           <Navigation />
         ) : (

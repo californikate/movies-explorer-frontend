@@ -1,8 +1,8 @@
 // презентационный компонент, который отрисовывает подвал.
 
-import React from "react";
+import React from 'react';
 import './Footer.css';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return(

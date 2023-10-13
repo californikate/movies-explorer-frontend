@@ -1,6 +1,6 @@
 // отвечает за работу прелоадера
 
-import React from "react";
+import React from 'react';
 import './Preloader.css';
 
 function Preloader() {

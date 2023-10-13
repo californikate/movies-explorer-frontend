@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
-import { Link, NavLink } from "react-router-dom";
 
 function Navbar({ isOpen, onClose }) {
   return(
